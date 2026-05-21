@@ -9,7 +9,7 @@
     <style>
         :root { --bg: #0f172a; --text: #f8fafc; --card: rgba(30, 41, 59, 0.5); }
         .light-mode { --bg: #f8fafc; --text: #0f172a; --card: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); transition: 0.3s; scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); transition: 0.3s; scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
         .serif { font-family: 'Playfair Display', serif; }
         .gold-text { color: #b8912e; }
         
@@ -18,21 +18,30 @@
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1.2); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-        .chapter-card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; border-radius: 1rem; }
-        .chapter-card:hover { border-color: #b8912e; transform: translateY(-3px); }
-        .lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.65); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; z-index: 10; }
-        
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); }
-        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.98); }
+        .modal.active { display: flex; flex-direction: column; }
 
-        /* CORRECCIÓN CRÍTICA PDF MÓVIL */
-        #pdf-modal .flex-col { width: 100%; height: 100%; }
-        #pdf-frame { width: 100% !important; height: 100% !important; border: none; }
-        
+        /* CONTENEDOR MAESTRO PARA PDF EN MÓVIL */
+        .pdf-container {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            background: #333;
+        }
+
+        #pdf-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         @media (max-width: 768px) {
-            #pdf-modal .p-4 { padding: 10px; }
-            /* Forzamos que el visor ignore márgenes internos */
-            .iframe-container { flex: 1; width: 100vw; height: calc(100vh - 50px); overflow: hidden; }
+            .pdf-header { padding: 10px; }
+            #pdf-frame { width: 100vw; }
         }
     </style>
 </head>
@@ -59,42 +68,39 @@
     </header>
 
     <main class="max-w-7xl mx-auto p-4 md:p-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div onclick="openPDF('intro')" class="chapter-card rounded-xl border-green-500/30">
+        <div onclick="openPDF('intro')" class="cursor-pointer bg-slate-800/50 rounded-xl border border-green-500/30 overflow-hidden">
             <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="h-44 w-full object-cover">
             <div class="p-4 flex justify-between items-center">
                 <span class="font-bold text-xs uppercase text-green-500">Introducción</span>
-                <span class="text-[10px] bg-green-500/10 px-2 py-1 rounded text-green-500 font-bold uppercase">Abierto</span>
+                <span class="text-[10px] bg-green-500/10 px-2 py-1 rounded text-green-500 font-bold">ABIERTO</span>
             </div>
         </div>
-        <div onclick="check('cap1')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 1: Ineficacia</div></div>
-        <div onclick="check('cap2')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 2: Probatorio</div></div>
-        <div onclick="check('cap3')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/0pMvtRSj/cap3.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 3: Daño</div></div>
-        <div onclick="check('cap4')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 4: Chance</div></div>
-        <div onclick="check('cap5')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/JjGwWjZv/cap5.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 5: El Método</div></div>
-        <div onclick="check('cap6')" class="chapter-card rounded-xl border-gold-border/40"><img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold gold-text text-xs uppercase">Cap. 6: La Fórmula</div></div>
-    </main>
+        <div onclick="check('cap1')" class="relative cursor-pointer bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+            <img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-44 w-full object-cover">
+            <div class="absolute inset-0 bg-black/60 flex items-center justify-center text-2xl lock-icon">🔒</div>
+            <div class="p-4 font-bold text-xs uppercase text-slate-400">Cap. 1: Ineficacia</div>
+        </div>
+        </main>
+
+    <div id="pdf-modal" class="modal">
+        <div class="pdf-header p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
+            <button onclick="toggleModal('pdf-modal')" class="text-white text-xs font-bold border border-slate-700 px-4 py-2 rounded-xl uppercase">CERRAR</button>
+            <span id="pdf-title" class="gold-text font-bold text-xs uppercase tracking-widest"></span>
+            <div class="w-10"></div>
+        </div>
+        <div class="pdf-container">
+            <iframe id="pdf-frame" src="" allow="autoplay"></iframe>
+        </div>
+    </div>
 
     <div id="login-modal" class="modal">
-        <div class="bg-slate-900 p-8 rounded-3xl border border-[#b8912e] max-w-sm w-full relative mx-4">
+        <div class="bg-slate-900 p-8 rounded-3xl border border-[#b8912e] max-w-sm w-full relative mx-4 m-auto">
             <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
             <h2 class="text-xl serif mb-8 text-center gold-text font-bold uppercase">Ingresar</h2>
             <input type="text" id="u" placeholder="Correo" class="w-full bg-slate-800 p-4 rounded-xl mb-4 text-white border border-slate-700 outline-none">
             <input type="password" id="p" placeholder="Contraseña" class="w-full bg-slate-800 p-4 rounded-xl mb-6 text-white border border-slate-700 outline-none">
-            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm">Ingresar</button>
+            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm">Validar Acceso</button>
             <p id="err" class="text-red-500 text-[10px] mt-4 text-center hidden font-bold"></p>
-        </div>
-    </div>
-
-    <div id="pdf-modal" class="modal bg-black">
-        <div class="flex flex-col w-full h-full">
-            <div class="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
-                <button onclick="toggleModal('pdf-modal')" class="text-white text-[10px] font-bold border border-slate-700 px-4 py-2 rounded-xl uppercase">Cerrar</button>
-                <span id="pdf-title" class="gold-text font-bold text-[10px] uppercase"></span>
-                <div class="w-10"></div>
-            </div>
-            <div class="iframe-container">
-                <iframe id="pdf-frame" src="" allow="autoplay"></iframe>
-            </div>
         </div>
     </div>
 
@@ -111,7 +117,6 @@
             const btn = document.getElementById('bLog');
             if(!u || !p) return;
             btn.innerText = "Ingresando...";
-            
             const script = document.createElement('script');
             script.src = `${API}?user=${encodeURIComponent(u)}&pass=${encodeURIComponent(p)}&callback=authCallback`;
             document.body.appendChild(script);
@@ -121,15 +126,14 @@
         function authCallback(data) {
             const btn = document.getElementById('bLog');
             const err = document.getElementById('err');
-            btn.innerText = "Ingresar";
+            btn.innerText = "Validar Acceso";
             if(data.result === "success") {
                 logged = true;
                 document.getElementById('btn-login').classList.add('hidden');
                 document.getElementById('user-info').classList.replace('hidden', 'flex');
                 document.getElementById('user-name').innerText = data.nombre;
-                document.querySelectorAll('.lock-overlay').forEach(l => l.style.display = 'none');
+                document.querySelectorAll('.lock-icon').forEach(l => l.style.display = 'none');
                 toggleModal('login-modal');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 err.innerText = "DATOS INCORRECTOS";
                 err.classList.remove('hidden');
@@ -137,11 +141,17 @@
         }
 
         function check(id) { logged ? openPDF(id) : toggleModal('login-modal'); }
-        
+
         function openPDF(id) {
             document.getElementById('pdf-title').innerText = id;
-            // FITV forzamos el ajuste vertical y H horizontal para evitar el recorte en móviles
-            document.getElementById('pdf-frame').src = id + ".pdf#toolbar=0&navpanes=0&view=FitH";
+            
+            // URL ABSOLUTA DE TU ARCHIVO (Importante para que Google lo lea)
+            const pdfUrl = window.location.origin + window.location.pathname.replace('ebook.html', '') + id + '.pdf';
+            
+            // Usamos Google Docs Viewer para forzar el ajuste de ancho y el scroll multipágina en móviles
+            const finalUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+            
+            document.getElementById('pdf-frame').src = finalUrl;
             toggleModal('pdf-modal');
         }
     </script>
