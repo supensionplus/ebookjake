@@ -11,23 +11,38 @@
         .serif { font-family: 'Playfair Display', serif; }
         .gold-border { border: 1px solid #b8912e; }
         .gold-text { color: #b8912e; }
-        #splash-screen { position: fixed; inset: 0; z-index: 1000; background: #0f172a; display: flex; align-items: center; justify-content: center; animation: fadeOut 0.5s ease 3s forwards; }
+        
+        #splash-screen {
+            position: fixed; inset: 0; z-index: 1000; background: #0f172a;
+            display: flex; align-items: center; justify-content: center;
+            animation: fadeOut 0.5s ease 3s forwards;
+        }
         #splash-screen img { animation: zoomIn 3s ease-out forwards; max-width: 300px; }
+        
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1.2); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
         .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.95); overflow-y: auto; }
         .modal.active { display: flex; align-items: center; justify-content: center; }
-        .chapter-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; overflow: hidden; position: relative; }
+        
+        .chapter-card { 
+            background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); 
+            transition: 0.3s; cursor: pointer; overflow: hidden; position: relative;
+        }
         .chapter-card:hover { border-color: #b8912e; transform: translateY(-5px); }
-        .lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+        .lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 2rem; z-index: 10; }
     </style>
 </head>
 <body>
 
-    <div id="splash-screen"><img src="https://i.ibb.co/k2wGdLjc/portada.jpg" alt="Portada"></div>
+    <div id="splash-screen">
+        <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" alt="Portada">
+    </div>
 
     <nav class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50 sticky top-0 z-50 backdrop-blur-md">
-        <button id="btn-login-trigger" onclick="toggleModal('login-modal')" class="bg-[#b8912e] text-white px-6 py-2 rounded-full font-bold text-sm">INICIO / LOGIN</button>
+        <button id="btn-login-trigger" onclick="toggleModal('login-modal')" class="bg-[#b8912e] text-white px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+            INICIO / LOGIN
+        </button>
         <div id="user-display" class="hidden flex items-center gap-3">
             <span class="text-xs gold-text uppercase font-bold">Lector:</span>
             <span id="user-name-display" class="text-white font-semibold"></span>
@@ -36,34 +51,180 @@
         <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" class="w-10 h-10 rounded border border-gold-border object-cover">
     </nav>
 
+    <section class="bg-gradient-to-r from-slate-900 to-blue-900/40 p-8 border-b border-blue-500/20 text-center">
+        <p class="text-sm gold-text font-bold mb-2 tracking-widest uppercase">Ebook Interactivo</p>
+        <h1 class="text-4xl md:text-5xl font-bold serif mb-4">JAQUE MATE A LAS AFP</h1>
+        <p class="text-slate-400 italic mb-8">Domina la fórmula de pérdida de oportunidad de la Corte Suprema.</p>
+        
+        <div class="max-w-4xl mx-auto bg-slate-900/80 p-6 rounded-2xl gold-border flex flex-col md:flex-row items-center gap-6">
+            <img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="w-32 h-20 object-cover rounded-lg">
+            <div class="text-left flex-1">
+                <h3 class="gold-text font-bold uppercase text-xs tracking-tighter">Oferta Exclusiva</h3>
+                <p class="text-sm text-slate-300">¿Calculando a mano? No arriesgues tus honorarios. <strong>OPORTUNO V3.0</strong> automatiza los dictámenes en PDF y Excel.</p>
+            </div>
+            <a href="https://wa.me/573117715353?text=Hola%20Cesar,%20quiero%20comprar%20el%20ebook%20Jaque%20Mate%20o%20el%20software%20Oportuno" class="bg-green-600 px-6 py-3 rounded-xl font-bold text-xs uppercase whitespace-nowrap">Comprar Ahora</a>
+        </div>
+    </section>
+
     <main class="max-w-7xl mx-auto p-6 md:p-12">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
             <div onclick="openContent('intro')" class="chapter-card rounded-2xl col-span-full md:col-span-2 flex">
-                <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="w-1/3 object-cover">
+                <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="w-1/3 object-cover bg-slate-800">
                 <div class="p-6">
                     <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">Acceso Gratuito</span>
                     <h3 class="text-2xl font-bold serif mt-1">Introducción: El Horizonte</h3>
+                    <p class="text-xs text-slate-400 mt-2">La ruta definitiva hacia el éxito en el litigio previsional 2026.</p>
                 </div>
             </div>
+
             <div onclick="checkAccess('cap1')" class="chapter-card rounded-xl">
-                <img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="w-full h-48 object-cover">
-                <div class="lock-overlay" id="lock-cap1">🔒</div>
-                <div class="p-4 font-bold">Cap. 1: Ineficacia</div>
+                <img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="w-full h-48 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4"><h4 class="font-bold">Cap. 1: Ineficacia</h4></div>
             </div>
+
             <div onclick="checkAccess('cap2')" class="chapter-card rounded-xl">
-                <img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="w-full h-48 object-cover">
-                <div class="lock-overlay" id="lock-cap2">🔒</div>
-                <div class="p-4 font-bold">Cap. 2: Jaque Probatorio</div>
+                <img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="w-full h-48 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4"><h4 class="font-bold">Cap. 2: Jaque Probatorio</h4></div>
             </div>
+
             <div onclick="checkAccess('cap3')" class="chapter-card rounded-xl">
-                <img src="https://i.ibb.co/9mcJ7LQ7/cap3.jpg" class="w-full h-48 object-cover">
-                <div class="lock-overlay" id="lock-cap3">🔒</div>
-                <div class="p-4 font-bold">Cap. 3: Daño Previsional</div>
+                <img src="https://i.ibb.co/0pMvtRSj/cap3.jpg" class="w-full h-48 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4"><h4 class="font-bold">Cap. 3: Daño Previsional</h4></div>
             </div>
+
             <div onclick="checkAccess('cap4')" class="chapter-card rounded-xl">
-                <img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="w-full h-48 object-cover">
-                <div class="lock-overlay" id="lock-cap4">🔒</div>
-                <div class="p-4 font-bold">Cap. 4: Pérdida de Chance</div>
+                <img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="w-full h-48 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4"><h4 class="font-bold">Cap. 4: Pérdida de Chance</h4></div>
+            </div>
+
+            <div onclick="checkAccess('cap5')" class="chapter-card rounded-xl">
+                <img src="https://i.ibb.co/JjGwWjZv/cap5.jpg" class="w-full h-48 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4"><h4 class="font-bold">Cap. 5: El Método</h4></div>
+            </div>
+
+            <div onclick="checkAccess('cap6')" class="chapter-card rounded-xl border-gold-border/40">
+                <img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="w-full h-48 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4"><h4 class="font-bold gold-text">Cap. 6: Fórmula Maestra</h4></div>
+            </div>
+
+            <div onclick="checkAccess('bono1')" class="chapter-card rounded-xl border-blue-500/30">
+                <img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="w-full h-40 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4 font-bold text-blue-400">Bono 1: Kit Litigio</div>
+            </div>
+            
+            <div onclick="checkAccess('bono2')" class="chapter-card rounded-xl border-green-500/30">
+                <img src="https://i.ibb.co/fdhMYWMS/bono2.jpg" class="w-full h-40 object-cover"><div class="lock-overlay">🔒</div>
+                <div class="p-4 font-bold text-green-400">Bono 2: Plantillas Pro</div>
             </div>
         </div>
     </main>
+
+    <div id="login-modal" class="modal">
+        <div class="bg-slate-900 p-8 rounded-3xl gold-border max-w-sm w-full text-center relative">
+            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
+            <h2 class="text-xl serif mb-6 gold-text">Ingreso a Membresía</h2>
+            <input type="text" id="login-user" placeholder="Correo electrónico" class="w-full bg-slate-800 p-3 rounded-lg mb-4 text-white border border-slate-700 outline-none">
+            <input type="password" id="login-pass" placeholder="Contraseña" class="w-full bg-slate-800 p-3 rounded-lg mb-6 text-white border border-slate-700 outline-none">
+            <button onclick="processLogin()" id="btn-login" class="w-full bg-[#b8912e] py-3 rounded-lg font-bold uppercase">Verificar</button>
+            <p id="login-error" class="text-red-500 text-xs mt-4 hidden"></p>
+        </div>
+    </div>
+
+    <div id="pdf-modal" class="modal bg-black">
+        <div class="w-full h-full flex flex-col">
+            <div class="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
+                <button onclick="toggleModal('pdf-modal')" class="text-white bg-slate-800 px-4 py-2 rounded-lg text-xs font-bold">← VOLVER</button>
+                <h2 id="pdf-title" class="gold-text text-sm font-bold serif uppercase"></h2>
+                <div></div>
+            </div>
+            <iframe id="pdf-frame" src="" class="flex-1 w-full border-none"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbzw6m-5Re_xJQIU2BplmRRGO82xmys4kjqWSMRn2DB7uYdqzW5VeOuv1AEMhaFPODWTBQ/exec";
+        let sessionActive = false;
+        let inactivityTimer;
+
+        async function processLogin() {
+            const btn = document.getElementById('btn-login');
+            const user = document.getElementById('login-user').value.toLowerCase().trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            const errorMsg = document.getElementById('login-error');
+
+            if (!user || !pass) return;
+            btn.innerText = "Verificando...";
+            errorMsg.classList.add('hidden');
+
+            try {
+                // MÉTODO GET PARA EVITAR ERRORES EN GITHUB
+                const queryURL = `${API_URL}?action=login&user=${encodeURIComponent(user)}&pass=${encodeURIComponent(pass)}`;
+                const response = await fetch(queryURL);
+                const data = await response.json();
+
+                if (data.result === "success") {
+                    loginSuccess(data.nombre, user);
+                } else if (data.result === "limit") {
+                    errorMsg.innerText = "Ya tienes 2 dispositivos abiertos.";
+                    errorMsg.classList.remove('hidden');
+                } else {
+                    errorMsg.innerText = "Credenciales incorrectas.";
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (e) {
+                errorMsg.innerText = "Error de conexión. Intenta de nuevo.";
+                errorMsg.classList.remove('hidden');
+            }
+            btn.innerText = "VERIFICAR";
+        }
+
+        function loginSuccess(name, email) {
+            sessionActive = true;
+            localStorage.setItem('ebook_user', email);
+            localStorage.setItem('ebook_name', name);
+            document.getElementById('btn-login-trigger').classList.add('hidden');
+            document.getElementById('user-display').classList.replace('hidden', 'flex');
+            document.getElementById('user-name-display').innerText = name;
+            document.querySelectorAll('.lock-overlay').forEach(el => el.style.display = 'none');
+            toggleModal('login-modal');
+            resetInactivityTimer();
+        }
+
+        async function logout() {
+            const user = localStorage.getItem('ebook_user');
+            if (user) {
+                await fetch(`${API_URL}?action=logout&user=${encodeURIComponent(user)}`);
+            }
+            localStorage.clear();
+            location.reload();
+        }
+
+        function checkAccess(id) {
+            sessionActive ? openContent(id) : toggleModal('login-modal');
+        }
+
+        function openContent(id) {
+            document.getElementById('pdf-title').innerText = id.toUpperCase();
+            document.getElementById('pdf-frame').src = id + ".pdf#toolbar=0";
+            toggleModal('pdf-modal');
+        }
+
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle('active');
+            if (id === 'pdf-modal' && !document.getElementById(id).classList.contains('active')) {
+                document.getElementById('pdf-frame').src = "";
+            }
+        }
+
+        function resetInactivityTimer() {
+            if (!sessionActive) return;
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => { logout(); }, 300000); 
+        }
+
+        window.onmousemove = resetInactivityTimer;
+        window.onkeypress = resetInactivityTimer;
+    </script>
+</body>
+</html>
