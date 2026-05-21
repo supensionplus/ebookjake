@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAQUE MATE A LAS AFP | Supension Plus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; overflow-x: hidden; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .gold-border { border: 1px solid #b8912e; }
+        .gold-text { color: #b8912e; }
+        
+        /* Animación Inicial Zoom */
+        #splash-screen {
+            position: fixed; inset: 0; z-index: 1000; background: #0f172a;
+            display: flex; align-items: center; justify-content: center;
+            animation: fadeOut 0.5s ease 3s forwards;
+        }
+        #splash-screen img { animation: zoomIn 3s ease-out forwards; max-width: 300px; }
+        
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1.2); opacity: 1; } }
+        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+        /* Modales */
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, 0.95); overflow-y: auto; }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        
+        .chapter-card { 
+            background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); 
+            transition: 0.3s; cursor: pointer; overflow: hidden;
+        }
+        .chapter-card:hover { border-color: #b8912e; transform: translateY(-5px); }
+        .locked { filter: grayscale(1) blur(1px); opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <div id="splash-screen">
+        <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" alt="Portada">
+    </div>
+
+    <nav class="p-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50 sticky top-0 z-50 backdrop-blur-md">
+        <button onclick="toggleModal('login-modal')" class="bg-[#b8912e] text-white px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform">
+            INICIO / LOGIN
+        </button>
+        <div id="user-display" class="hidden flex items-center gap-3">
+            <span class="text-xs gold-text uppercase font-bold">Lector:</span>
+            <span id="user-name" class="text-white font-semibold">César Cano</span>
+            <button onclick="logout()" class="text-[10px] text-slate-500 underline">Salir</button>
+        </div>
+        <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" class="w-10 h-10 rounded border border-gold-border object-cover">
+    </nav>
+
+    <section class="bg-gradient-to-r from-slate-900 to-blue-900/40 p-6 border-b border-blue-500/20 text-center">
+        <p class="text-sm gold-text font-bold mb-2 tracking-widest uppercase">Ebook Interactivo</p>
+        <h1 class="text-4xl md:text-5xl font-bold serif mb-2">JAQUE MATE A LAS AFP</h1>
+        <p class="text-slate-400 italic">Domina la fórmula de pérdida de oportunidad de la Corte Suprema.</p>
+    </section>
+
+    <main class="max-w-7xl mx-auto p-6 md:p-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div onclick="openContent('intro')" class="chapter-card rounded-2xl col-span-full md:col-span-2 flex">
+                <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="w-1/3 object-cover bg-slate-800">
+                <div class="p-6">
+                    <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">Acceso Gratuito</span>
+                    <h3 class="text-2xl font-bold serif mt-1">Introducción: El Horizonte</h3>
+                    <p class="text-xs text-slate-400 mt-2">La ruta definitiva hacia el éxito en el litigio previsional 2026.</p>
+                </div>
+            </div>
+
+            <div onclick="checkAccess('cap1')" class="chapter-card rounded-xl group" id="card-cap1">
+                <div class="relative">
+                    <img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="w-full h-48 object-cover transition group-hover:scale-105">
+                    <div class="lock-icon absolute inset-0 flex items-center justify-center bg-black/40">🔒</div>
+                </div>
+                <div class="p-4"><h4 class="font-bold">Cap. 1: Fin de Ineficacia</h4></div>
+            </div>
+
+            <div onclick="checkAccess('cap2')" class="chapter-card rounded-xl group" id="card-cap2">
+                <div class="relative">
+                    <img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="w-full h-48 object-cover transition group-hover:scale-105">
+                    <div class="lock-icon absolute inset-0 flex items-center justify-center bg-black/40">🔒</div>
+                </div>
+                <div class="p-4"><h4 class="font-bold">Cap. 2: Jaque Probatorio</h4></div>
+            </div>
+
+            <div onclick="checkAccess('cap3')" class="chapter-card rounded-xl group" id="card-cap3">
+                <div class="relative">
+                    <img src="https://i.ibb.co/9mcJ7LQ7/cap3.jpg" class="w-full h-48 object-cover transition group-hover:scale-105">
+                    <div class="lock-icon absolute inset-0 flex items-center justify-center bg-black/40">🔒</div>
+                </div>
+                <div class="p-4"><h4 class="font-bold">Cap. 3: El Daño Previsional</h4></div>
+            </div>
+
+            <div onclick="checkAccess('cap4')" class="chapter-card rounded-xl group" id="card-cap4">
+                <div class="relative">
+                    <img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="w-full h-48 object-cover transition group-hover:scale-105">
+                    <div class="lock-icon absolute inset-0 flex items-center justify-center bg-black/40">🔒</div>
+                </div>
+                <div class="p-4"><h4 class="font-bold">Cap. 4: Pérdida de Chance</h4></div>
+            </div>
+
+            <div onclick="checkAccess('bono1')" class="chapter-card rounded-xl border-blue-500/30" id="card-bono1">
+                <img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="w-full h-40 object-cover">
+                <div class="p-4 font-bold text-blue-400">Bono 1: Kit de Litigio</div>
+            </div>
+            
+            <div onclick="checkAccess('bono2')" class="chapter-card rounded-xl border-green-500/30" id="card-bono2">
+                <img src="https://i.ibb.co/fdhMYWMS/bono2.jpg" class="w-full h-40 object-cover">
+                <div class="p-4 font-bold text-green-400">Bono 2: Plantillas Pro</div>
+            </div>
+        </div>
+    </main>
+
+    <div id="login-modal" class="modal">
+        <div class="bg-slate-900 p-8 rounded-3xl gold-border max-w-sm w-full relative">
+            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
+            <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" class="w-24 mx-auto mb-4 rounded-lg shadow-xl">
+            <h2 class="text-xl serif text-center mb-6 gold-text">Ingreso a Membresía</h2>
+            <input type="text" id="login-user" placeholder="Correo electrónico" class="w-full bg-slate-800 p-3 rounded-lg mb-4 border border-slate-700 outline-none focus:border-gold-text text-sm">
+            <input type="password" id="login-pass" placeholder="Contraseña" class="w-full bg-slate-800 p-3 rounded-lg mb-6 border border-slate-700 outline-none focus:border-gold-text text-sm">
+            <button onclick="processLogin()" id="btn-login" class="w-full bg-[#b8912e] py-3 rounded-lg font-bold uppercase tracking-widest text-sm">Verificar</button>
+            <p id="login-error" class="text-red-500 text-[10px] text-center mt-4 hidden"></p>
+        </div>
+    </div>
+
+    <div id="buy-modal" class="modal">
+        <div class="bg-slate-900 p-8 rounded-3xl border border-blue-500 max-w-md w-full text-center">
+            <span class="text-4xl">💎</span>
+            <h2 class="text-2xl serif mt-4 mb-2">Contenido Exclusivo</h2>
+            <p class="text-slate-400 text-sm mb-6">Este capítulo es exclusivo para miembros. Únete a la élite de litigantes que ya están ganando con Supension Plus.</p>
+            <a href="https://wa.me/573117715353?text=Hola%20quiero%20comprar%20el%20ebook%20Jaque%20Mate,%20mi%20nombre%20es..." class="block bg-green-600 py-4 rounded-xl font-bold uppercase mb-4">Comprar Ebook Ahora</a>
+            <button onclick="toggleModal('buy-modal')" class="text-xs text-slate-500 underline">Cerrar</button>
+        </div>
+    </div>
+
+    <div id="pdf-modal" class="modal bg-black">
+        <div class="w-full h-full flex flex-col">
+            <div class="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
+                <button onclick="toggleModal('pdf-modal')" class="text-white bg-slate-800 px-4 py-2 rounded-lg text-xs font-bold">← VOLVER</button>
+                <h2 id="pdf-title" class="gold-text text-sm font-bold serif uppercase"></h2>
+                <div class="w-10"></div>
+            </div>
+            <iframe id="pdf-frame" src="" class="flex-1 w-full border-none"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de la BDD (CSV de Google Sheets)
+        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQElO8Q8zwxzh038yRqkh0ImnRZlXAWfnmOY7tcYG0gtEAUxacHhriLQn7OiOdEqcQn4qoADV3G3I-/pub?gid=0&single=true&output=csv";
+        let sessionActive = false;
+        let inactivityTimer;
+
+        // 1. Cargar Datos y Validar
+        async function processLogin() {
+            const btn = document.getElementById('btn-login');
+            const error = document.getElementById('login-error');
+            const userInput = document.getElementById('login-user').value.toLowerCase();
+            const passInput = document.getElementById('login-pass').value;
+
+            btn.innerText = "Validando...";
+            
+            try {
+                const response = await fetch(CSV_URL);
+                const text = await response.text();
+                const rows = text.split('\n').map(row => row.split(','));
+
+                // filas: [usuario, nombre, password, vence, x]
+                const userRow = rows.find(r => r[0].trim().toLowerCase() === userInput && r[2].trim() === passInput);
+
+                if (userRow) {
+                    const activeSessions = parseInt(userRow[4]) || 0;
+                    
+                    if (activeSessions >= 2) {
+                        showError("Máximo de 2 dispositivos alcanzado. Cierra otra sesión.");
+                    } else {
+                        loginSuccess(userRow[1], userRow[0]);
+                    }
+                } else {
+                    showError("Usuario o contraseña incorrectos.");
+                }
+            } catch (err) {
+                showError("Error de conexión con la base de datos.");
+            }
+            btn.innerText = "Verificar";
+        }
+
+        function loginSuccess(name, email) {
+            sessionActive = true;
+            localStorage.setItem('ebook_session', email);
+            localStorage.setItem('ebook_name', name);
+            
+            document.getElementById('user-display').classList.remove('hidden');
+            document.getElementById('user-name').innerText = name;
+            toggleModal('login-modal');
+            unlockContent();
+            resetInactivityTimer();
+        }
+
+        function showError(msg) {
+            const error = document.getElementById('login-error');
+            error.innerText = msg;
+            error.classList.remove('hidden');
+        }
+
+        // 2. Control de Acceso
+        function checkAccess(target) {
+            if (sessionActive) {
+                openContent(target);
+            } else {
+                toggleModal('buy-modal');
+            }
+        }
+
+        function unlockContent() {
+            document.querySelectorAll('.lock-icon').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.locked').forEach(el => el.classList.remove('locked'));
+        }
+
+        function openContent(id) {
+            const titles = {
+                intro: "Introducción: Horizonte", cap1: "Cap. 1: Ineficacia", cap2: "Cap. 2: Probatorio",
+                cap3: "Cap. 3: Daño", cap4: "Cap. 4: Oportunidad", cap5: "Cap. 5: Método",
+                cap6: "Cap. 6: Fórmula", bono1: "Bono 1: Kit", bono2: "Bono 2: Plantillas"
+            };
+            const frame = document.getElementById('pdf-frame');
+            document.getElementById('pdf-title').innerText = titles[id];
+            frame.src = `${id}.pdf#toolbar=0&navpanes=0`;
+            toggleModal('pdf-modal');
+        }
+
+        // 3. Utilidades
+        function toggleModal(id) {
+            const m = document.getElementById(id);
+            m.classList.toggle('active');
+            if (id === 'pdf-modal' && !m.classList.contains('active')) document.getElementById('pdf-frame').src = "";
+        }
+
+        function logout() {
+            localStorage.clear();
+            location.reload();
+        }
+
+        // Inactividad
+        function resetInactivityTimer() {
+            if (!sessionActive) return;
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                alert("Sesión cerrada por inactividad (5 min)");
+                logout();
+            }, 300000); 
+        }
+
+        window.onmousemove = resetInactivityTimer;
+        window.onkeypress = resetInactivityTimer;
+
+        function toggleModal(id) {
+            document.getElementById(id).classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
