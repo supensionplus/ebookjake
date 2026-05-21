@@ -9,143 +9,172 @@
     <style>
         :root { --bg: #0f172a; --text: #f8fafc; --card: rgba(30, 41, 59, 0.5); }
         .light-mode { --bg: #f8fafc; --text: #0f172a; --card: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); transition: 0.3s; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); transition: 0.3s; scroll-behavior: smooth; }
         .serif { font-family: 'Playfair Display', serif; }
         .gold-text { color: #b8912e; }
         .gold-border { border: 1px solid #b8912e; }
         
+        /* Splash Zoom */
         #splash { position: fixed; inset: 0; z-index: 1000; background: #0f172a; display: flex; align-items: center; justify-content: center; animation: fadeOut 0.5s ease 3s forwards; }
-        #splash img { animation: zoomIn 3s ease-out forwards; max-width: 280px; }
+        #splash img { animation: zoomIn 3s ease-out forwards; max-width: 260px; }
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1.2); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
         .chapter-card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; }
         .chapter-card:hover { border-color: #b8912e; transform: translateY(-3px); }
-        .lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; z-index: 10; }
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); }
+        .lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.65); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; z-index: 10; }
+        
+        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); }
         .modal.active { display: flex; align-items: center; justify-content: center; }
+
+        /* Ajuste PDF Móvil */
+        @media (max-width: 768px) {
+            #pdf-frame { width: 100vw !important; height: calc(100vh - 60px) !important; margin: 0 !important; }
+            .modal-content { width: 95% !important; margin: auto; }
+        }
     </style>
 </head>
 <body>
 
     <div id="splash"><img src="https://i.ibb.co/k2wGdLjc/portada.jpg"></div>
 
-    <nav class="p-4 border-b border-slate-800 flex justify-between items-center sticky top-0 z-50 bg-slate-900/80 backdrop-blur">
+    <nav class="p-4 border-b border-slate-800 flex justify-between items-center sticky top-0 z-50 bg-slate-900/90 backdrop-blur">
         <div class="flex gap-2">
-            <button onclick="toggleModal('login-modal')" id="btn-login" class="bg-[#b8912e] text-white px-4 py-2 rounded-xl text-xs font-bold uppercase">Acceso</button>
+            <button onclick="toggleModal('login-modal')" id="btn-login" class="bg-[#b8912e] text-white px-5 py-2 rounded-xl text-xs font-bold uppercase hover:bg-yellow-600 transition">Acceso</button>
             <button onclick="toggleTheme()" class="px-3 py-2 border border-slate-700 rounded-xl text-xs">🌓</button>
         </div>
-        <div id="user-info" class="hidden text-xs font-bold gold-text uppercase items-center gap-2">
+        <div id="user-info" class="hidden text-[10px] font-bold gold-text uppercase items-center gap-2">
             <span id="user-name"></span> | <button onclick="location.reload()" class="underline text-slate-500">Salir</button>
         </div>
         <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" class="w-10 h-10 rounded border border-[#b8912e] object-cover">
     </nav>
 
-    <header class="py-10 text-center px-4">
-        <h1 class="text-4xl md:text-5xl font-bold serif gold-text uppercase">Jaque Mate a las AFP</h1>
-        <p class="text-slate-400 mt-2 italic">Domina la fórmula de pérdida de oportunidad de la Corte Suprema.</p>
+    <header class="py-12 text-center px-6">
+        <h1 class="text-4xl md:text-6xl font-bold serif gold-text uppercase leading-tight">Jaque Mate <br class="md:hidden"> a las AFP</h1>
+        <p class="text-slate-400 mt-3 italic text-sm md:text-base">El nuevo estándar del litigio previsional en Colombia.</p>
     </header>
 
-    <main class="max-w-7xl mx-auto p-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div onclick="openPDF('intro')" class="chapter-card rounded-2xl col-span-full md:col-span-2 flex items-center p-4">
-            <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="w-24 h-24 rounded-lg object-cover">
-            <div class="ml-4"><span class="text-[10px] text-green-500 font-bold uppercase">Abierto</span><h3 class="text-xl font-bold serif">Introducción Definitiva</h3></div>
+    <main class="max-w-7xl mx-auto p-4 md:p-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="biblioteca">
+        <div onclick="openPDF('intro')" class="chapter-card rounded-2xl col-span-full md:col-span-2 flex items-center p-5 border-green-500/30">
+            <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="w-24 h-24 rounded-xl object-cover">
+            <div class="ml-5">
+                <span class="text-[10px] bg-green-500/20 text-green-500 px-2 py-1 rounded font-bold uppercase">Lectura Libre</span>
+                <h3 class="text-xl font-bold serif mt-2">La Nueva Era</h3>
+            </div>
         </div>
 
-        <div onclick="check('cap1')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs">Cap. 1: Fin Ineficacia</div></div>
-        <div onclick="check('cap2')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs">Cap. 2: Jaque Probatorio</div></div>
-        <div onclick="check('cap3')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/0pMvtRSj/cap3.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs">Cap. 3: Daño Previsional</div></div>
-        <div onclick="check('cap4')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs">Cap. 4: Pérdida de Chance</div></div>
-        <div onclick="check('cap5')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/JjGwWjZv/cap5.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs">Cap. 5: El Método</div></div>
-        <div onclick="check('cap6')" class="chapter-card rounded-xl border-gold-border/40"><img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold gold-text text-xs">Cap. 6: Fórmula Maestra</div></div>
+        <div onclick="check('cap1')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 1: Ineficacia</div></div>
+        <div onclick="check('cap2')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 2: Probatorio</div></div>
+        <div onclick="check('cap3')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/0pMvtRSj/cap3.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 3: Daño</div></div>
+        <div onclick="check('cap4')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 4: Chance</div></div>
+        <div onclick="check('cap5')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/JjGwWjZv/cap5.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 5: El Método</div></div>
+        <div onclick="check('cap6')" class="chapter-card rounded-xl border-gold-border/40"><img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold gold-text text-xs uppercase tracking-widest">Cap. 6: La Fórmula</div></div>
 
-        <div onclick="check('bono1')" class="chapter-card rounded-xl border-blue-500/30"><img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="h-32 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs text-blue-400">Bono 1: Kit Litigio</div></div>
-        <div onclick="check('bono2')" class="chapter-card rounded-xl border-green-500/30"><img src="https://i.ibb.co/fdhMYWMS/bono2.jpg" class="h-32 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-3 font-bold text-xs text-green-400">Bono 2: Plantillas</div></div>
+        <div onclick="check('bono1')" class="chapter-card rounded-xl border-blue-500/20"><img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="h-36 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-[10px] text-blue-400 uppercase">Bono: Kit Litigio</div></div>
+        <div onclick="check('bono2')" class="chapter-card rounded-xl border-green-500/20"><img src="https://i.ibb.co/fdhMYWMS/bono2.jpg" class="h-36 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-[10px] text-green-400 uppercase">Bono: Plantillas</div></div>
     </main>
 
-    <section class="max-w-4xl mx-auto my-12 p-1 bg-gradient-to-r from-[#b8912e] to-yellow-600 rounded-3xl">
-        <div class="bg-slate-900 rounded-[22px] p-8 flex flex-col md:flex-row items-center gap-6">
-            <div class="flex-1">
-                <h2 class="text-2xl font-bold serif mb-2 text-white">¿Buscas OPORTUNO V3.0?</h2>
-                <p class="text-slate-400 text-sm">Automatiza tus cálculos con la nueva fórmula judicial. Evita errores y exporta en PDF/Excel.</p>
-            </div>
-            <div class="flex flex-col gap-2">
-                <button onclick="openPDF('resumen')" class="bg-blue-600 px-6 py-3 rounded-xl font-bold uppercase text-white text-xs">Ver Resumen</button>
-                <a href="https://wa.me/573117715353" class="bg-green-600 px-6 py-3 rounded-xl font-bold uppercase text-white text-xs text-center">Info WhatsApp</a>
+    <footer class="max-w-4xl mx-auto my-16 px-6">
+        <div class="p-1 bg-gradient-to-br from-gold-text to-yellow-700 rounded-[32px]">
+            <div class="bg-slate-900 rounded-[30px] p-8 md:p-12 text-center md:text-left flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-bold serif text-white mb-4">¿Te imaginas procesar estos cálculos en segundos?</h2>
+                    <p class="text-slate-400 leading-relaxed text-sm">El <strong>Capítulo 6</strong> revela la complejidad de la fórmula judicial. Saberla es el primer paso, pero <strong>dominarla con software</strong> es lo que te separa del resto. Automatiza tus dictámenes con la tecnología de Supension Plus.</p>
+                    <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+                        <a href="https://wa.me/573117715353?text=Quiero%20ver%20el%20video%20demostrativo%20del%20Software" class="bg-blue-600 px-6 py-3 rounded-xl font-bold text-xs uppercase">Ver Video Demo</a>
+                        <a href="https://wa.me/573117715353?text=Hola%20Cesar,%20quiero%20adquirir%20la%20licencia%20del%20Software" class="bg-green-600 px-6 py-3 rounded-xl font-bold text-xs uppercase">Comprar Licencia</a>
+                    </div>
+                </div>
+                <img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="w-48 h-48 rounded-3xl object-cover shadow-2xl border border-gold-text/30">
             </div>
         </div>
-    </section>
+    </footer>
 
-    <div id="login-modal" class="modal">
-        <div class="bg-slate-900 p-8 rounded-3xl border border-[#b8912e] max-w-sm w-full relative mx-4">
-            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
-            <h2 class="text-xl serif mb-6 text-center gold-text font-bold uppercase">Ingreso</h2>
-            <input type="text" id="u" placeholder="Correo electrónico" class="w-full bg-slate-800 p-3 rounded-xl mb-4 text-white border border-slate-700 outline-none">
-            <div class="relative mb-6">
-                <input type="password" id="p" placeholder="Contraseña" class="w-full bg-slate-800 p-3 rounded-xl text-white border border-slate-700 outline-none">
-                <button onclick="tPass()" class="absolute right-4 top-3 shadow-none">👁️</button>
-            </div>
-            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm">Validar Acceso</button>
-            <p id="err" class="text-red-500 text-xs mt-4 text-center hidden"></p>
+    <div id="locked-modal" class="modal">
+        <div class="bg-slate-900 p-8 rounded-3xl gold-border max-w-sm w-full relative mx-4 text-center">
+            <button onclick="toggleModal('locked-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
+            <div class="text-4xl mb-4">💎</div>
+            <h2 class="text-xl font-bold serif gold-text mb-4 uppercase">Sección Exclusiva</h2>
+            <p class="text-xs text-slate-400 mb-6 leading-relaxed">Para acceder a este nivel de estrategia, debes ingresar con tu usuario activo o adquirir tu membresía profesional.</p>
+            
+            <button onclick="switchModal('locked-modal', 'login-modal')" class="w-full bg-[#b8912e] py-3 rounded-xl font-bold text-xs uppercase mb-3">Tengo Usuario / Acceder</button>
+            <button onclick="openPDF('resumen')" class="w-full border border-slate-700 py-3 rounded-xl font-bold text-xs uppercase mb-6">Ver Resumen Gratuito</button>
+            
+            <hr class="border-slate-800 mb-6">
+            <a href="https://wa.me/573117715353" class="text-green-500 font-bold text-xs uppercase underline">Consultar Compra por WhatsApp</a>
         </div>
     </div>
 
-    <div id="pdf-modal" class="modal bg-black"><div class="w-full h-full flex flex-col"><div class="p-4 bg-slate-900 flex justify-between text-xs font-bold uppercase"><button onclick="toggleModal('pdf-modal')">← Cerrar</button><span id="pdf-title" class="gold-text"></span><div></div></div><iframe id="pdf-frame" src="" class="flex-1 w-full border-none"></iframe></div></div>
+    <div id="login-modal" class="modal">
+        <div class="bg-slate-900 p-8 rounded-3xl gold-border max-w-sm w-full relative mx-4">
+            <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
+            <h2 class="text-xl serif mb-6 text-center gold-text font-bold uppercase tracking-widest">Validar Acceso</h2>
+            <input type="text" id="u" placeholder="Correo" class="w-full bg-slate-800 p-4 rounded-xl mb-4 text-white border border-slate-700 outline-none focus:border-gold-text">
+            <div class="relative mb-6">
+                <input type="password" id="p" placeholder="Contraseña" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700 outline-none focus:border-gold-text">
+                <button onclick="tPass()" class="absolute right-4 top-4">👁️</button>
+            </div>
+            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm">Entrar a la Biblioteca</button>
+            <p id="err" class="text-red-500 text-[10px] mt-4 text-center hidden"></p>
+        </div>
+    </div>
+
+    <div id="pdf-modal" class="modal bg-black">
+        <div class="w-full h-full flex flex-col">
+            <div class="p-4 bg-slate-900 flex justify-between items-center">
+                <button onclick="toggleModal('pdf-modal')" class="text-white text-[10px] font-bold uppercase border border-slate-700 px-3 py-1 rounded">Cerrar Visor</button>
+                <span id="pdf-title" class="gold-text font-bold text-[10px] uppercase"></span>
+                <div class="w-10"></div>
+            </div>
+            <iframe id="pdf-frame" src="" class="flex-1 w-full border-none bg-white"></iframe>
+        </div>
+    </div>
 
     <script>
-        // Lógica de conexión simplificada al CSV
-        const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQElO8Q8zwxzh038yRqkh0ImnRZlXAWfnmOY7tcYG0gtEAUxacHhriLQn7OiOdEqcQn4qoADV3G3I-/pub?gid=0&single=true&output=csv";
+        const API = "https://script.google.com/macros/s/AKfycbzw6m-5Re_xJQIU2BplmRRGO82xmys4kjqWSMRn2DB7uYdqzW5VeOuv1AEMhaFPODWTBQ/exec";
         let logged = false;
 
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleModal(id) { document.getElementById(id).classList.toggle('active'); }
+        function switchModal(close, open) { toggleModal(close); toggleModal(open); }
         function tPass() { const x = document.getElementById('p'); x.type = x.type === 'password' ? 'text' : 'password'; }
 
         async function login() {
-            const uInput = document.getElementById('u').value.toLowerCase().trim();
-            const pInput = document.getElementById('p').value.trim();
-            const e = document.getElementById('err');
+            const u = document.getElementById('u').value.toLowerCase().trim();
+            const p = document.getElementById('p').value.trim();
             const btn = document.getElementById('bLog');
-
-            btn.innerText = "Consultando...";
-            e.classList.add('hidden');
+            const err = document.getElementById('err');
+            if(!u || !p) return;
+            btn.innerText = "Sincronizando...";
 
             try {
-                // Usamos fetch directamente al CSV. Google permite peticiones de lectura sencillas.
-                const response = await fetch(CSV_URL);
-                const text = await response.text();
-                const rows = text.split('\n').map(row => row.split(','));
-
-                const userRow = rows.find(r => r[1] && r[1].trim().toLowerCase() === uInput && r[2] && r[2].trim() === pInput);
-
-                if (userRow) {
-                    const vence = new Date(userRow[3]);
-                    if (new Date() > vence) {
-                        e.innerText = "Suscripción vencida.";
-                        e.classList.remove('hidden');
-                    } else {
-                        logged = true;
-                        document.getElementById('btn-login').classList.add('hidden');
-                        document.getElementById('user-info').classList.replace('hidden', 'flex');
-                        document.getElementById('user-name').innerText = userRow[0];
-                        document.querySelectorAll('.lock-overlay').forEach(l => l.style.display = 'none');
-                        toggleModal('login-modal');
-                    }
+                const response = await fetch(`${API}?user=${encodeURIComponent(u)}&pass=${encodeURIComponent(p)}`);
+                const data = await response.json();
+                if(data.result === "success") {
+                    logged = true;
+                    document.getElementById('btn-login').classList.add('hidden');
+                    document.getElementById('user-info').classList.replace('hidden', 'flex');
+                    document.getElementById('user-name').innerText = data.nombre;
+                    document.querySelectorAll('.lock-overlay').forEach(l => l.style.display = 'none');
+                    toggleModal('login-modal');
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll arriba
                 } else {
-                    e.innerText = "Correo o contraseña no coinciden.";
-                    e.classList.remove('hidden');
+                    err.innerText = "Credenciales no válidas.";
+                    err.classList.remove('hidden');
                 }
-            } catch (err) {
-                e.innerText = "Error de servidor. Intenta de nuevo.";
-                e.classList.remove('hidden');
+            } catch (e) {
+                err.innerText = "Reconexión necesaria. Intenta de nuevo.";
+                err.classList.remove('hidden');
             }
-            btn.innerText = "Validar Acceso";
+            btn.innerText = "Entrar a la Biblioteca";
         }
 
-        function check(id) { logged ? openPDF(id) : toggleModal('login-modal'); }
+        function check(id) { logged ? openPDF(id) : toggleModal('locked-modal'); }
+        
         function openPDF(id) {
-            document.getElementById('pdf-title').innerText = id.toUpperCase();
-            document.getElementById('pdf-frame').src = id + ".pdf#toolbar=0&navpanes=0";
+            document.getElementById('pdf-title').innerText = id;
+            document.getElementById('pdf-frame').src = id + ".pdf#toolbar=0&navpanes=0&view=FitH";
+            if(document.getElementById('locked-modal').classList.contains('active')) toggleModal('locked-modal');
             toggleModal('pdf-modal');
         }
     </script>
