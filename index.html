@@ -27,11 +27,10 @@
         .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); }
         .modal.active { display: flex; align-items: center; justify-content: center; }
 
-        /* Ajuste PDF para Móviles */
+        /* Optimización PDF para Móviles */
         @media (max-width: 768px) {
-            #pdf-frame { width: 100vw !important; height: calc(100vh - 60px) !important; margin: 0 !important; }
+            #pdf-frame { width: 100vw !important; height: calc(100vh - 60px) !important; }
             .chapter-card img { height: 130px; }
-            .modal-content { width: 95% !important; }
         }
     </style>
 </head>
@@ -41,7 +40,7 @@
 
     <nav class="p-4 border-b border-slate-800 flex justify-between items-center sticky top-0 z-50 bg-slate-900/90 backdrop-blur">
         <div class="flex gap-2">
-            <button onclick="toggleModal('login-modal')" id="btn-login" class="bg-[#b8912e] text-white px-5 py-2 rounded-xl text-xs font-bold uppercase hover:bg-yellow-600 transition">Acceso</button>
+            <button onclick="toggleModal('login-modal')" id="btn-login" class="bg-[#b8912e] text-white px-5 py-2 rounded-xl text-xs font-bold uppercase">Acceso</button>
             <button onclick="toggleTheme()" class="px-3 py-2 border border-slate-700 rounded-xl text-xs">🌓</button>
         </div>
         <div id="user-info" class="hidden text-[10px] font-bold gold-text uppercase items-center gap-2">
@@ -51,8 +50,8 @@
     </nav>
 
     <header class="py-12 text-center px-6">
-        <h1 class="text-4xl md:text-6xl font-bold serif gold-text uppercase leading-tight">Jaque Mate <br class="md:hidden"> a las AFP</h1>
-        <p class="text-slate-400 mt-2 italic text-sm md:text-base">Dominando la técnica de la Pérdida de Oportunidad.</p>
+        <h1 class="text-4xl md:text-6xl font-bold serif gold-text uppercase">Jaque Mate a las AFP</h1>
+        <p class="text-slate-400 mt-2 italic text-sm md:text-base">Dominando la Fórmula de Pérdida de Oportunidad.</p>
     </header>
 
     <main class="max-w-7xl mx-auto p-4 md:p-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="biblioteca">
@@ -65,12 +64,12 @@
             </div>
         </div>
 
-        <div onclick="check('cap1')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 1: Ineficacia</div></div>
-        <div onclick="check('cap2')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 2: Probatorio</div></div>
-        <div onclick="check('cap3')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/0pMvtRSj/cap3.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 3: Daño</div></div>
-        <div onclick="check('cap4')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 4: Chance</div></div>
-        <div onclick="check('cap5')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/JjGwWjZv/cap5.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase tracking-widest">Cap. 5: El Método</div></div>
-        <div onclick="check('cap6')" class="chapter-card rounded-xl border-gold-border/40"><img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold gold-text text-xs uppercase tracking-widest">Cap. 6: La Fórmula</div></div>
+        <div onclick="check('cap1')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 1: Ineficacia</div></div>
+        <div onclick="check('cap2')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 2: Probatorio</div></div>
+        <div onclick="check('cap3')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/0pMvtRSj/cap3.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 3: Daño</div></div>
+        <div onclick="check('cap4')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/NgG7DKqk/cap4.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 4: Chance</div></div>
+        <div onclick="check('cap5')" class="chapter-card rounded-xl"><img src="https://i.ibb.co/JjGwWjZv/cap5.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-xs uppercase">Cap. 5: El Método</div></div>
+        <div onclick="check('cap6')" class="chapter-card rounded-xl border-gold-border/40"><img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="h-44 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold gold-text text-xs uppercase">Cap. 6: La Fórmula</div></div>
 
         <div onclick="check('bono1')" class="chapter-card rounded-xl border-blue-500/20"><img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="h-36 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-[10px] text-blue-400 uppercase">Bono: Kit Litigio</div></div>
         <div onclick="check('bono2')" class="chapter-card rounded-xl border-green-500/20"><img src="https://i.ibb.co/fdhMYWMS/bono2.jpg" class="h-36 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-4 font-bold text-[10px] text-green-400 uppercase">Bono: Plantillas</div></div>
@@ -80,48 +79,42 @@
         <div class="p-1 bg-gradient-to-br from-[#b8912e] to-yellow-700 rounded-[35px] shadow-2xl">
             <div class="bg-slate-900 rounded-[33px] p-8 md:p-14 flex flex-col md:flex-row items-center gap-10">
                 <div class="flex-1 text-center md:text-left">
-                    <h2 class="text-3xl font-bold serif text-white mb-6">¿Conocimiento o Productividad?</h2>
+                    <h2 class="text-3xl font-bold serif text-white mb-6">Conocimiento vs. Productividad</h2>
                     <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-8">
-                        El <strong>Capítulo 6</strong> te entrega el mapa técnico, pero el <strong>Software Oportuno</strong> es el vehículo. Deja de hacer cálculos manuales y automatiza tus dictámenes periciales con la herramienta líder en el mercado.
+                        Dominar la técnica del <strong>Capítulo 6</strong> te posiciona en la élite. Sin embargo, para escalar tus resultados, necesitas la precisión de <strong>Oportuno V3.0</strong>. Automatiza hoy lo que antes tomaba horas.
                     </p>
                     <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                        <a href="https://wa.me/573117715353?text=Quiero%20ver%20la%20demostracion%20del%20Software%20Oportuno" class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-2xl font-bold text-xs uppercase transition shadow-lg">Ver Demo Software</a>
-                        <a href="https://wa.me/573117715353?text=Hola%20Cesar,%20quiero%20adquirir%20la%20licencia%20del%20Software" class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-2xl font-bold text-xs uppercase transition shadow-lg">Comprar Licencia</a>
+                        <a href="https://wa.me/573117715353?text=Hola%20Cesar,%20quiero%20ver%20la%20demo%20de%20Oportuno" class="bg-blue-600 px-8 py-4 rounded-2xl font-bold text-xs uppercase transition shadow-lg">Ver Video Demo</a>
+                        <a href="https://wa.me/573117715353?text=Deseo%20informacion%20de%20compra%20Software%20Oportuno" class="bg-green-600 px-8 py-4 rounded-2xl font-bold text-xs uppercase transition shadow-lg text-center">Comprar Licencia</a>
                     </div>
                 </div>
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gold-text rounded-3xl blur opacity-25 group-hover:opacity-50 transition"></div>
-                    <img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="relative w-56 h-56 rounded-3xl object-cover shadow-2xl border border-white/10">
-                </div>
+                <img src="https://i.ibb.co/spwGWYDP/cap6.jpg" class="w-56 h-56 rounded-3xl object-cover shadow-2xl border border-white/10 hidden md:block">
             </div>
         </div>
     </footer>
 
     <div id="locked-modal" class="modal">
-        <div class="bg-slate-900 p-8 rounded-3xl gold-border modal-content max-w-sm w-full relative mx-4 text-center">
+        <div class="bg-slate-900 p-8 rounded-3xl gold-border max-w-sm w-full relative mx-4 text-center">
             <button onclick="toggleModal('locked-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
             <div class="text-5xl mb-5">💎</div>
-            <h2 class="text-2xl font-bold serif gold-text mb-4 uppercase tracking-tighter">Acceso Exclusivo</h2>
-            <p class="text-xs text-slate-400 mb-8 leading-relaxed">Esta sección está inhabilitada. Para ver este capítulo, por favor accede con tu cuenta o adquiere tu entrada a la membresía profesional.</p>
-            
-            <button onclick="switchModal('locked-modal', 'login-modal')" class="w-full bg-[#b8912e] py-4 rounded-2xl font-bold text-xs uppercase mb-3 shadow-lg">Ingresar o Acceder</button>
-            <button onclick="openPDF('resumen')" class="w-full border border-slate-700 py-4 rounded-2xl font-bold text-xs uppercase mb-8 hover:bg-slate-800 transition">Ver Resumen del Ebook</button>
-            
-            <hr class="border-slate-800 mb-6">
-            <a href="https://wa.me/573117715353" class="text-green-500 font-bold text-[10px] uppercase underline tracking-widest">Consultar compra por WhatsApp</a>
+            <h2 class="text-2xl font-bold serif gold-text mb-4 uppercase">Sección Exclusiva</h2>
+            <p class="text-xs text-slate-400 mb-8 leading-relaxed">Este capítulo está inhabilitado para tu acceso actual. Por favor ingresa con tu cuenta o conoce nuestra investigación mediante el resumen.</p>
+            <button onclick="switchModal('locked-modal', 'login-modal')" class="w-full bg-[#b8912e] py-4 rounded-2xl font-bold text-xs uppercase mb-3 shadow-lg">Ingresar Ahora</button>
+            <button onclick="openPDF('resumen')" class="w-full border border-slate-700 py-4 rounded-2xl font-bold text-xs uppercase mb-8">Ver Resumen Ebook</button>
+            <a href="https://wa.me/573117715353" class="text-green-500 font-bold text-[10px] uppercase underline tracking-widest">Consultar Acceso WhatsApp</a>
         </div>
     </div>
 
     <div id="login-modal" class="modal">
-        <div class="bg-slate-900 p-8 rounded-3xl gold-border modal-content max-w-sm w-full relative mx-4">
+        <div class="bg-slate-900 p-8 rounded-3xl gold-border max-w-sm w-full relative mx-4">
             <button onclick="toggleModal('login-modal')" class="absolute top-4 right-4 text-slate-500">✕</button>
-            <h2 class="text-xl serif mb-8 text-center gold-text font-bold uppercase tracking-widest">Validar Acceso</h2>
-            <input type="text" id="u" placeholder="Correo electrónico" class="w-full bg-slate-800 p-4 rounded-xl mb-4 text-white border border-slate-700 outline-none focus:border-gold-text transition">
+            <h2 class="text-xl serif mb-8 text-center gold-text font-bold uppercase tracking-widest">Sincronizar Acceso</h2>
+            <input type="text" id="u" placeholder="Correo" class="w-full bg-slate-800 p-4 rounded-xl mb-4 text-white border border-slate-700 outline-none">
             <div class="relative mb-8">
-                <input type="password" id="p" placeholder="Contraseña" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700 outline-none focus:border-gold-text transition">
+                <input type="password" id="p" placeholder="Contraseña" class="w-full bg-slate-800 p-4 rounded-xl text-white border border-slate-700 outline-none">
                 <button onclick="tPass()" class="absolute right-4 top-4 opacity-50">👁️</button>
             </div>
-            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm shadow-xl">Sincronizar ahora</button>
+            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm">Validar</button>
             <p id="err" class="text-red-500 text-[10px] mt-4 text-center hidden font-bold"></p>
         </div>
     </div>
@@ -130,7 +123,7 @@
         <div class="w-full h-full flex flex-col">
             <div class="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
                 <button onclick="toggleModal('pdf-modal')" class="text-white text-[10px] font-bold border border-slate-700 px-4 py-2 rounded-xl uppercase">Cerrar Visor</button>
-                <span id="pdf-title" class="gold-text font-bold text-[10px] uppercase tracking-widest"></span>
+                <span id="pdf-title" class="gold-text font-bold text-[10px] uppercase"></span>
                 <div class="w-10"></div>
             </div>
             <iframe id="pdf-frame" src="" class="flex-1 w-full border-none bg-white"></iframe>
@@ -138,7 +131,6 @@
     </div>
 
     <script>
-        // URL DE TU APLICACIÓN WEB DE GOOGLE
         const API = "https://script.google.com/macros/s/AKfycbzw6m-5Re_xJQIU2BplmRRGO82xmys4kjqWSMRn2DB7uYdqzW5VeOuv1AEMhaFPODWTBQ/exec";
         let logged = false;
 
@@ -147,7 +139,7 @@
         function switchModal(close, open) { toggleModal(close); toggleModal(open); }
         function tPass() { const x = document.getElementById('p'); x.type = x.type === 'password' ? 'text' : 'password'; }
 
-        // Sincronización JSONP (Elimina el error CORB)
+        // SINCRONIZACIÓN JSONP (Elimina el error de Sincronizando)
         function login() {
             const u = document.getElementById('u').value.toLowerCase().trim();
             const p = document.getElementById('p').value.trim();
@@ -164,11 +156,11 @@
             document.body.removeChild(script);
         }
 
-        // Respuesta del Servidor Google
+        // RESPUESTA DE GOOGLE
         function authCallback(data) {
             const btn = document.getElementById('bLog');
             const err = document.getElementById('err');
-            btn.innerText = "Sincronizar ahora";
+            btn.innerText = "Validar";
 
             if(data.result === "success") {
                 logged = true;
@@ -177,10 +169,9 @@
                 document.getElementById('user-name').innerText = data.nombre;
                 document.querySelectorAll('.lock-overlay').forEach(l => l.style.display = 'none');
                 toggleModal('login-modal');
-                // Al ingresar, inicia desde el inicio
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll al inicio
             } else {
-                err.innerText = data.result === "expired" ? "TU ACCESO HA VENCIDO" : "DATOS INCORRECTOS O USUARIO NO EXISTE";
+                err.innerText = data.result === "expired" ? "SUSCRIPCIÓN VENCIDA" : "DATOS INCORRECTOS";
                 err.classList.remove('hidden');
             }
         }
@@ -189,7 +180,6 @@
         
         function openPDF(id) {
             document.getElementById('pdf-title').innerText = id;
-            // FitH ajusta el ancho a la pantalla (ideal para móviles)
             document.getElementById('pdf-frame').src = id + ".pdf#toolbar=0&navpanes=0&view=FitH";
             if(document.getElementById('locked-modal').classList.contains('active')) toggleModal('locked-modal');
             toggleModal('pdf-modal');
