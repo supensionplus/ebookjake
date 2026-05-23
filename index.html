@@ -2,155 +2,279 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JAQUE MATE A LAS AFP | Supension Plus</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaque Mate a las AFP - Suite de Alta Gerencia Previsional</title>
     <style>
-        :root { --bg: #0f172a; --text: #f8fafc; --card: rgba(30, 41, 59, 0.5); }
-        .light-mode { --bg: #f8fafc; --text: #0f172a; --card: #ffffff; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); transition: 0.3s; scroll-behavior: smooth; overflow-x: hidden; }
-        .serif { font-family: 'Playfair Display', serif; }
-        .gold-text { color: #b8912e; }
-        
-        /* Animación de Entrada */
-        #splash { position: fixed; inset: 0; z-index: 1000; background: #0f172a; display: flex; align-items: center; justify-content: center; animation: fadeOut 0.5s ease 3s forwards; }
-        #splash img { animation: zoomIn 3s ease-out forwards; max-width: 260px; }
-        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1.2); opacity: 1; } }
-        @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-
-        /* Estética de Tarjetas */
-        .chapter-card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; border-radius: 1.5rem; }
-        .chapter-card:hover { border-color: #b8912e; transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(184, 145, 46, 0.3); }
-        .lock-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; z-index: 10; }
-        
-        /* Modal Híbrido de Pantalla Completa */
-        .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); }
-        .modal.active { display: flex; flex-direction: column; }
-
-        .modal-content-area { flex: 1; width: 100%; height: 100%; overflow: hidden; background: transparent; }
-        
-        /* Estilos para Lectura de Capítulos */
-        .readable-view { height: 100%; overflow-y: auto; padding: 2rem 1rem; -webkit-overflow-scrolling: touch; }
-        .readable-view iframe { width: 100%; height: 100%; border: none; background: white; border-radius: 12px; }
-
-        /* Ajuste de Nombre de Usuario y Botón Salir */
-        #user-info { font-size: 0.9rem; font-weight: 700; color: #b8912e; }
-        .btn-salir { background: #1e293b; color: #cbd5e1; padding: 0.4rem 1rem; border-radius: 0.75rem; transition: 0.2s; }
-        .btn-salir:hover { background: #ef4444; color: white; }
-
-        @media (max-width: 768px) {
-            .header-title { font-size: 2.5rem; }
-            .chapter-card img { height: 140px; }
+        :root {
+            --primary-color: #0f172a; /* Azul ultra oscuro / Premium */
+            --secondary-color: #1e3a8a; /* Azul institucional */
+            --accent-color: #b45309; /* Dorado / Bronce de autoridad */
+            --text-color: #334155;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --success-color: #10b981;
+            --border-color: #e2e8f0;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* ENCABEZADO */
+        header { background: var(--primary-color); color: white; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--accent-color); }
+        .logo-area h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; color: #fff; }
+        .logo-area h1 span { color: var(--accent-color); }
+        .logo-area p { font-size: 0.8rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+        
+        /* Selector de Rol Comercial (Simulador) */
+        .auth-status { background: #1e293b; padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid #334155; display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; }
+        .auth-status select { background: transparent; color: white; border: none; font-weight: bold; cursor: pointer; outline: none; }
+
+        /* CONTENEDOR PRINCIPAL */
+        .main-container { max-width: 1200px; width: 100%; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: 3fr 1fr; gap: 2rem; flex: 1; }
+
+        /* BIENVENIDA E INTRO */
+        .welcome-card { background: var(--card-bg); border-radius: 12px; padding: 2rem; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        .welcome-card h2 { color: var(--secondary-color); font-size: 1.8rem; margin-bottom: 1rem; }
+        .welcome-card p { line-height: 1.6; margin-bottom: 1rem; font-size: 1rem; }
+
+        /* REJILLA DE CAPÍTULOS Y HERRAMIENTAS */
+        .section-title { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; color: var(--primary-color); margin-bottom: 1rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 0.5rem; }
+        .grid-modules { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem; }
+
+        /* TARJETAS DEL MENÚ (CAPÍTULOS / BONOS) */
+        .mod-card { background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: all 0.2s ease-in-out; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .mod-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+        .mod-badge { position: absolute; top: 0.75rem; right: 0.75rem; font-size: 0.7rem; font-weight: 800; padding: 0.15rem 0.4rem; border-radius: 4px; text-transform: uppercase; }
+        .badge-free { background: #dcfce7; color: #15803d; }
+        .badge-premium { background: #fef3c7; color: #92400e; }
+        .mod-info h3 { font-size: 1.1rem; color: var(--secondary-color); font-weight: 700; margin-bottom: 0.5rem; padding-right: 3.5rem; }
+        .mod-info p { font-size: 0.85rem; color: #64748b; line-height: 1.4; margin-bottom: 1.25rem; }
+        
+        .btn-entrar { background: #f1f5f9; color: var(--primary-color); text-align: center; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; text-decoration: none; display: block; border: 1px solid #e2e8f0; transition: background 0.2s; }
+        .mod-card:hover .btn-entrar { background: var(--secondary-color); color: white; border-color: var(--secondary-color); }
+
+        /* LATERAL COMERCIAL (PROMO OPORTUNO / SOPORTE) */
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .side-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .side-card.promo { background: #fffbeb; border: 1px solid #fde68a; }
+        .side-card h4 { color: var(--primary-color); font-size: 0.95rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.75rem; }
+        .side-card p { font-size: 0.85rem; line-height: 1.5; color: #475569; margin-bottom: 1rem; }
+        .btn-side { display: block; text-align: center; background: var(--accent-color); color: white; padding: 0.5rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; text-decoration: none; }
+        .btn-side:hover { background: #92400e; }
+
+        /* RECUADRO MODAL (BLOQUEO COMERCIAL EMERGENTE) */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: white; max-width: 500px; width: 90%; padding: 2rem; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border-top: 6px solid var(--danger-color, #ef4444); text-align: center; transform: scale(0.9); transition: transform 0.3s ease; }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        
+        .modal-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .modal-content h3 { color: #0f172a; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.75rem; }
+        .modal-content p { font-size: 0.95rem; color: #475569; line-height: 1.5; margin-bottom: 1.5rem; }
+        .modal-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
+        .btn-modal-primary { background: #1e3a8a; color: white; padding: 0.7rem; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 0.95rem; }
+        .btn-modal-secondary { background: #f1f5f9; color: #475569; padding: 0.6rem; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; border: 1px solid #cbd5e1; }
+
+        /* FOOTER */
+        footer { background: var(--primary-color); color: #64748b; text-align: center; padding: 1.5rem; font-size: 0.85rem; font-weight: 600; border-top: 1px solid #1e293b; margin-top: auto; }
+        footer span { color: var(--accent-color); }
     </style>
 </head>
 <body>
 
-    <div id="splash"><img src="https://i.ibb.co/k2wGdLjc/portada.jpg"></div>
-
-    <nav class="p-4 border-b border-slate-800 flex justify-between items-center sticky top-0 z-50 bg-slate-900/95 backdrop-blur">
-        <div class="flex gap-2">
-            <button onclick="toggleModal('login-modal')" id="btn-login" class="bg-[#b8912e] text-white px-5 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Acceso</button>
-            <button onclick="toggleTheme()" class="px-3 py-2 border border-slate-700 rounded-xl text-xs">🌓</button>
+    <header>
+        <div class="logo-area">
+            <h1>JAQUE MATE <span>A LAS AFP</span></h1>
+            <p>Ecosistema Digital de Litigio Avanzado • Supension Plus</p>
         </div>
-        <div id="user-info" class="hidden flex items-center gap-3">
-            <span id="user-name" class="uppercase"></span> 
-            <button onclick="location.reload()" class="btn-salir text-[10px] font-bold">SALIR</button>
+        <div class="auth-status">
+            <div>🔑 ESTADO DE ACCESO:</div>
+            <select id="cmbAcceso">
+                <option value="premium">LICENCIA PREMIUM ACTIVA</option>
+                <option value="visitante">VISITANTE / NO REGISTRADO</option>
+            </select>
         </div>
-        <img src="https://i.ibb.co/k2wGdLjc/portada.jpg" class="w-10 h-10 rounded border border-[#b8912e] object-cover">
-    </nav>
-
-    <header class="py-16 text-center px-6">
-        <h1 class="header-title text-5xl md:text-7xl font-bold serif gold-text uppercase leading-none">Jaque Mate <br> a las AFP</h1>
-        <p class="text-slate-300 mt-6 italic text-2xl md:text-3xl font-semibold tracking-wide">Estrategia Jurídica César Cano</p>
     </header>
 
-    <main class="max-w-7xl mx-auto p-4 md:p-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div onclick="launchContent('intro.html')" class="chapter-card rounded-2xl border-green-500/30">
-            <img src="https://i.ibb.co/5XVkxjpK/intro.jpg" class="h-48 w-full object-cover">
-            <div class="p-5 flex justify-between items-center">
-                <span class="font-bold text-xs uppercase text-green-500 tracking-tighter">Introducción</span>
-                <span class="text-[10px] bg-green-500/10 px-2 py-1 rounded text-green-500 font-bold uppercase">Lectura</span>
+    <div class="main-container">
+        
+        <main>
+            <div class="welcome-card">
+                <h2>Bienvenido a la Alta Gerencia Previsional</h2>
+                <p>Estás ante la suite interactiva que automatiza el conocimiento técnico y el arsenal de demandas contra los fondos privados de pensión por <strong>Pérdida de Oportunidad</strong>. Utiliza los módulos de abajo para estudiar la doctrina o auditar tus expedientes.</p>
             </div>
-        </div>
 
-        <div onclick="validateAndLaunch('cap1.html')" class="chapter-card"><img src="https://i.ibb.co/9mcJ7LQ7/cap1.jpg" class="h-48 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-5 font-bold text-xs uppercase text-slate-400">Cap. 1: Ineficacia</div></div>
-        <div onclick="validateAndLaunch('cap2.html')" class="chapter-card"><img src="https://i.ibb.co/5gKm1HxY/cap2.jpg" class="h-48 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-5 font-bold text-xs uppercase text-slate-400">Cap. 2: Probatorio</div></div>
-        <div onclick="validateAndLaunch('bono1.html')" class="chapter-card border-blue-500/30"><img src="https://i.ibb.co/tpqT7jK8/bono1.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-5 font-bold text-xs uppercase text-blue-400">Bono 1: Kit Litigio</div></div>
-        <div onclick="validateAndLaunch('bono2.html')" class="chapter-card border-amber-500/30"><img src="https://i.ibb.co/fdhMYWMS/bono2.jpg" class="h-40 w-full object-cover"><div class="lock-overlay">🔒</div><div class="p-5 font-bold text-xs uppercase text-amber-500">Bono 2: Plantillas Pro</div></div>
-    </main>
+            <div class="section-title">📖 Manual Doctrinal de Casos Efectivos</div>
+            <div class="grid-modules">
+                
+                <div class="mod-card" onclick="navegarMódulo('introduccion', 'libre')">
+                    <span class="mod-badge badge-free">Gratis</span>
+                    <div class="mod-info">
+                        <h3>Introducción</h3>
+                        <p>Las reglas del juego cambiaron. El nuevo panorama del perjuicio previsional indexado.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
 
-    <div id="viewer-modal" class="modal">
-        <div class="p-4 bg-slate-900 flex justify-between items-center border-b border-slate-800">
-            <button onclick="toggleModal('viewer-modal')" class="text-white text-[10px] font-bold border border-slate-700 px-5 py-2 rounded-xl uppercase hover:bg-red-600 transition">Cerrar</button>
-            <span class="gold-text font-bold text-xs uppercase tracking-widest">Supension Plus Cloud</span>
-            <div class="w-10"></div>
-        </div>
-        <div class="modal-content-area">
-            <div class="readable-view">
-                <iframe id="main-frame" src=""></iframe>
+                <div class="mod-card" onclick="navegarMódulo('cap1', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 1</h3>
+                        <p>La base del engaño: Cómo se estructuró el traslado asimétrico en el RAIS.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('cap2', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 2</h3>
+                        <p>El Deber de Información: La inversión de la carga de la prueba en los juzgados.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('cap3', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 3</h3>
+                        <p>Modalidades Pensionales: Retiro Programado vs. Renta Vitalicia en el marco del daño.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('cap4', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 4</h3>
+                        <p>La Prescripción Trienal: El muro jurídico donde mueren los abogados descuidados.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('cap5', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 5</h3>
+                        <p>Las Trampas Ocultas de las AFP: Retiro de excedentes de capital y anticipos.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('cap6', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 6</h3>
+                        <p>La Fórmula de la Corte Suprema: Teoría de la probabilidad y cuantía del perjuicio.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('cap7', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Capítulo 7</h3>
+                        <p>Análisis de Jurisprudencia Reciente y Actualizaciones del Autor.</p>
+                    </div>
+                    <div class="btn-entrar">Estudiar Capítulo</div>
+                </div>
+
+            </div>
+
+            <div class="section-title">⚡ Herramientas y Bonos de Aplicación Inmediata</div>
+            <div class="grid-modules">
+                
+                <div class="mod-card" onclick="navegarMódulo('bono1', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Bono 1: Ficha Maestra</h3>
+                        <p>CRM Portátil de Expedientes con Auditoría Matemática Inmediata de Prescripción.</p>
+                    </div>
+                    <div class="btn-entrar">Abrir Software</div>
+                </div>
+
+                <div class="mod-card" onclick="navegarMódulo('bono2', 'premium')">
+                    <span class="mod-badge badge-premium">Premium</span>
+                    <div class="mod-info">
+                        <h3>Bono 2: Minutas y Copia-Pegue</h3>
+                        <p>Modelos de Pretensiones y Hechos Clave estructurados listos para radicar.</p>
+                    </div>
+                    <div class="btn-entrar">Descargar Plantillas</div>
+                </div>
+
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <div class="side-card promo">
+                <h4>🧮 Integración Oportuno V3.0</h4>
+                <p>Recuerda que para procesar la historia laboral y aplicar las fórmulas exactas de indexación de la Corte Suprema, debes importar tus archivos JSON en la suite completa de liquidación actuarial.</p>
+                <a href="#" class="btn-side" onclick="alert('Conectando con la pasarela de Supension Plus...')">Acceder a Oportuno</a>
+            </div>
+
+            <div class="side-card">
+                <h4>📞 Soporte de Ingeniería</h4>
+                <p>¿Tienes dudas con el manejo de las variables del simulador o las listas dinámicas?</p>
+                <p><strong>WhatsApp Nacional:</strong><br>+57 311 771 5353</p>
+            </div>
+        </aside>
+
+    </div>
+
+    <div class="modal-overlay" id="blockModal">
+        <div class="modal-content">
+            <div class="modal-icon">🔒</div>
+            <h3>Acceso Restringido - Suite Exclusiva</h3>
+            <p>Esta sección pertenece al ecosistema cerrado de alta gerencia previsional de <strong>Supension Plus</strong>. Para desbloquear el arsenal completo de minutas de demandas, los módulos doctrinales avanzados y el CRM inteligente de expedientes, inicia sesión con tu cuenta premium o adquiere una licencia comercial activa.</p>
+            <div class="modal-buttons">
+                <a href="#" class="btn-modal-primary" onclick="alert('Redireccionando a la pasarela comercial de Jaque Mate a las AFP...')">Adquirir Licencia / Iniciar Sesión</a>
+                <button type="button" class="btn-modal-secondary" onclick="cerrarModal()">Regresar al Menú</button>
             </div>
         </div>
     </div>
 
-    <div id="login-modal" class="modal">
-        <div class="bg-slate-900 p-8 rounded-[2rem] border border-[#b8912e] max-w-sm w-full relative mx-4 m-auto">
-            <button onclick="toggleModal('login-modal')" class="absolute top-6 right-6 text-slate-500">✕</button>
-            <h2 class="text-xl serif mb-8 text-center gold-text font-bold uppercase tracking-widest">Acceso Profesional</h2>
-            <input type="text" id="u" placeholder="Usuario / Correo" class="w-full bg-slate-800 p-4 rounded-xl mb-4 text-white border border-slate-700 outline-none focus:border-gold-text transition">
-            <input type="password" id="p" placeholder="Contraseña" class="w-full bg-slate-800 p-4 rounded-xl mb-8 text-white border border-slate-700 outline-none focus:border-gold-text transition">
-            <button onclick="login()" id="bLog" class="w-full bg-[#b8912e] py-4 rounded-xl font-bold uppercase text-sm text-white shadow-lg">Validar</button>
-            <p id="err" class="text-red-500 text-[10px] mt-4 text-center hidden font-bold"></p>
-        </div>
-    </div>
+    <footer>
+        Ecosistema Desarrollado para César Cano • <span>Supension Plus S.A.S.</span> • Todos los derechos reservados © 2026
+    </footer>
 
     <script>
-        const API = "https://script.google.com/macros/s/AKfycbybvaepAwxKd5HQzFhK0LjRDRT7HlkSyh_VaHjYDsUEApJDdMhGs1jgJVzjVhACrDgaqw/exec";
-        let logged = false;
+        // CONTROLADOR DE NAVEGACIÓN INTELIGENTE CON FILTRO DE BLOQUEO
+        function navegarMódulo(moduloId, tipoAcceso) {
+            const nivelAccesoActual = document.getElementById('cmbAcceso').value;
 
-        function toggleTheme() { document.body.classList.toggle('light-mode'); }
-        function toggleModal(id) { document.getElementById(id).classList.toggle('active'); }
-
-        // LANZADOR MAESTRO
-        function launchContent(file) {
-            const frame = document.getElementById('main-frame');
-            frame.src = file; // Carga el HTML directamente (Capítulo o Bono)
-            toggleModal('viewer-modal');
-        }
-
-        function validateAndLaunch(file) {
-            logged ? launchContent(file) : toggleModal('login-modal');
-        }
-
-        // LOGIN (Tu lógica JSONP que ya funciona)
-        function login() {
-            const u = document.getElementById('u').value.toLowerCase().trim();
-            const p = document.getElementById('p').value.trim();
-            const btn = document.getElementById('bLog');
-            if(!u || !p) return;
-            btn.innerText = "Verificando...";
-            const script = document.createElement('script');
-            script.src = `${API}?user=${encodeURIComponent(u)}&pass=${encodeURIComponent(p)}&callback=authCallback`;
-            document.body.appendChild(script);
-            document.body.removeChild(script);
-        }
-
-        function authCallback(data) {
-            const btn = document.getElementById('bLog');
-            const err = document.getElementById('err');
-            btn.innerText = "Validar";
-            if(data.result === "success") {
-                logged = true;
-                document.getElementById('btn-login').classList.add('hidden');
-                document.getElementById('user-info').classList.replace('hidden', 'flex');
-                document.getElementById('user-name').innerText = data.nombre;
-                document.querySelectorAll('.lock-overlay').forEach(l => l.style.display = 'none');
-                toggleModal('login-modal');
-            } else {
-                err.innerText = "ERROR DE ACCESO";
-                err.classList.remove('hidden');
+            // Si el módulo es premium y el usuario está simulado como "visitante", saltar bloqueo
+            if (tipoAcceso === 'premium' && nivelAccesoActual === 'visitante') {
+                abrirModal();
+                return;
             }
+
+            // Si pasa los filtros, direccionar según el caso al archivo correspondiente
+            switch (moduloId) {
+                case 'introduccion':
+                    alert('Abriendo Introducción... (Aquí cargarás el texto nativo)');
+                    break;
+                case 'cap7':
+                    window.location.href = 'cap7.html';
+                    break;
+                case 'bono1':
+                    window.location.href = 'bono1.html';
+                    break;
+                case 'bono2':
+                    window.location.href = 'bono2.html';
+                    break;
+                default:
+                    alert('Abriendo Capítulo ' + moduloId.replace('cap', '') + '... (Texto nativo en desarrollo)');
+                    break;
+            }
+        }
+
+        // FUNCIONES DE CONTROL DE LA VENTANA MODAL DE BLOQUEO
+        function abrirModal() {
+            document.getElementById('blockModal').classList.add('active');
+        }
+
+        function cerrarModal() {
+            document.getElementById('blockModal').classList.remove('active');
         }
     </script>
 </body>
