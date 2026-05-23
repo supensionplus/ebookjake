@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 6: La Fórmula Maestra y los 5 Casos de Éxito</title>
+    <!-- Configuración e inclusión de MathJax para renderizado impecable de ecuaciones matemáticas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --accent-color: #d97706;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-tag {
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.25rem;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        h2.subtitle {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border-bottom: 4px solid var(--secondary-color);
+            padding-bottom: 1rem;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .image-container {
+            width: 100%;
+            margin: 1.5rem 0 2.5rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.75rem;
+            position: absolute;
+            left: 0;
+            top: -0.25rem;
+        }
+
+        .sub-list {
+            margin: 0.5rem 0 1rem 0;
+        }
+
+        .sub-list li {
+            font-size: 1.05rem;
+        }
+
+        .sub-list li::before {
+            content: "◦";
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            top: -0.15rem;
+        }
+
+        .math-block {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0;
+            }
+            .container {
+                padding: 1.5rem;
+                border-radius: 0;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+            h2.subtitle {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="header-tag">Ebook Manual de Litigio Estratégico — Capítulo 6</span>
+        <h1>CAPÍTULO 6: LA FÓRMULA MAESTRA Y LOS 5 CASOS DE ÉXITO: CÓMO CALCULAR LA INDEMNIZACIÓN SIN FALLAR EN EL INTENTO</h1>
+        <h2 class="subtitle">El cálculo exacto para exigir un pago único indemnizatorio y asegurar tu victoria.</h2>
+        
+        <!-- ESPACIO REQUERIDO PARA INCRUSTAR EL LINK DE LA IMAGEN -->
+        <div class="image-container">
+            <img src="https://i.ibb.co/spwGWYDP/cap6.jpg" alt="Ilustración del Capítulo 6">
+        </div>
+        
+        <p>Has llegado al clímax de tu litigio. Lograste evadir la trampa de la ineficacia, usaste la carga de la prueba para demostrar la culpa de la AFP y convenciste al juez de que el verdadero daño es la "Pérdida de Oportunidad". Ahora te enfrentas al desafío final. El magistrado te mira fijamente y te pide el dato más importante de todo el proceso: </p>
+        
+        <p><em>"Doctor, ¿de cuánto es exactamente la indemnización que solicita en su juramento estimatorio?"</em></p>
+        
+        <p>Es aquí donde se ganan o se pierden los millones. La Corte Suprema de Justicia, consciente de que no existía un mandato legal sobre cómo tasar este perjuicio autónomo, decidió acudir a la equidad y a métodos estadísticos y matemáticos para evitar "condenas en abstracto". Para ello, los magistrados diseñaron y estandarizaron una fórmula actuarial unificada de obligatorio cumplimiento para tasar la oportunidad perdida.</p>
+        
+        <p>La ecuación maestra que la Corte exige aplicar se calcula multiplicando tres componentes exactos:</p>
+        
+        <div class="math-block">
+            $$\text{Indemnización} = \text{PP} \times (\text{MesadaRPM} - \text{MesadaRAIS}) \times (\text{EVaños} \times 13)$$
+        </div>
+        
+        <p>A simple vista, parece una multiplicación inofensiva, pero veamos qué significa realmente, por qué la Corte la definió así y cuál es la complejidad que esconde cada variable:</p>
+        
+        <ul>
+            <li><strong>1. El Porcentaje de Probabilidad Pensional (PP):</strong> Este es el factor más innovador. Es un porcentaje que resume, en un solo número, qué tan cerca estaba tu cliente de pensionarse en Colpensiones justo en el momento en que firmó el traslado engañoso. Su subfórmula es una verdadera pesadilla para quien no domina la estadística:
+                <div class="math-block">
+                    $$\text{PP} = \left(0,5 \times \left(\frac{S}{1300}\right)^{0,5}\right) \times 2^{-\frac{|E-Er|}{100}}$$
+                </div>
+                <ul class="sub-list">
+                    <li><strong>0,5 (50%):</strong> Es la constante inicial. Refleja que, al existir dos regímenes (RSPMPD y RAIS), la persona tenía matemáticamente un 50% de probabilidad inicial de estar en cualquiera de los dos.</li>
+                    <li><strong>$\left(\frac{S}{1300}\right)^{0,5}$ :</strong> Mide el efecto de las semanas cotizadas ($S$) al momento del traslado frente al requisito de 1300 semanas. Aplicarle el exponente 0,5 (raíz cuadrada) hace que la densidad de semanas equilibre la probabilidad.</li>
+                    <li><strong>$2^{-\frac{|E-Er|}{100}}$ :</strong> Esta variable exponencial mide la distancia entre la edad del cliente al momento del traslado ($E$) y la edad exigida por ley ($Er$). Si la persona estaba más cerca de la edad de pensión al trasladarse, el factor sube; si estaba muy lejos, baja.</li>
+                </ul>
+            </li>
+            <li><strong>2. La Diferencia Pensional (MesadaRPM − MesadaRAIS):</strong> Aquí es donde la mayoría de los abogados fracasan. Debes restarle a la mesada hipotética de Colpensiones, la mesada real que el cliente recibe en el fondo privado. ¡Pero cuidado! Calcular la mesada hipotética de Colpensiones exige reconstruir toda la historia laboral del cliente, calcular el Ingreso Base de Liquidación (IBL) indexado mes a mes (ya sea de los últimos 10 años o de toda la vida laboral), y aplicarle la compleja tasa de reemplazo de la Ley 797 de 2003.</li>
+            <li><strong>3. El Periodo Indemnizable (EVaños * 13):</strong> Finalmente, este factor convierte el tiempo en un número real de pagos. Debes tomar la expectativa de vida exacta del cliente al momento en que ingresó a nómina, utilizando estrictamente las tablas de la Resolución 1555 de 2010 de la Superintendencia Financiera, y multiplicarla por 13 (las mesadas que reconoce el sistema anualmente).</li>
+        </ul>
+        
+        <h3>La prueba reina: Los 5 Casos de Éxito de 2026</h3>
+        
+        <p>Para demostrarte el poder de esta fórmula cuando se aplica con precisión, veamos los resultados exactos que arrojó la Corte Suprema de Justicia en las 5 sentencias de unificación proferidas el 4 de febrero de 2026:</p>
+        
+        <ul>
+            <li><strong>Caso 1 (Sentencia SL168-2026 / Fabiola Gómez vs. Porvenir):</strong> Se trasladó a los 39 años con 589 semanas. La Corte calculó su probabilidad pensional (PP) en 29,71%. Al cruzar esto con la diferencia de su mesada y su expectativa de vida (25,3 años), la administradora fue condonada a pagar una indemnización única de $230.048.730.</li>
+            <li><strong>Caso 2 (Sentencia SL169-2026 / Nicolás Navarro vs. Protección):</strong> Cambió de régimen a los 39 años con 446 semanas. Obtuvo una PP del 24,98%. Con una diferencia pensional de $2.308.497 mensuales, logró una victoria contundente por $153.672.684.</li>
+            <li><strong>Caso 3 (Sentencia SL170-2026 / María Sánchez vs. Porvenir):</strong> Se trasladó a los 38 años con 549 semanas. Tras un complejo cálculo de IBL, se determinó una PP del 28,50%. La condena a su favor alcanzó los $117.166.316.</li>
+            <li><strong>Caso 4 (Sentencia SL175-2026 / Bertulfo Montoya vs. Porvenir):</strong> Se vinculó al fondo privado a los 35 años con 657 semanas. Su PP se fijó en 29,49%. Al aplicar la fórmula sobre la oportunidad perdida, se ordenó el pago indexado de $62.527.263.</li>
+            <li><strong>Caso 5 (Sentencia SL177-2026 / Martha Briceño vs. Porvenir):</strong> Se trasladó a los 35 años con 766 semanas. La Corte estimó su PP en 32,97% y, tras calcular su expectativa de vida de 28,3 años, condenó al fondo a desembolsar $64.530.898.</li>
+        </ul>
+        
+        <h3>La Solución Definitiva: No arriesgues tus honorarios</h3>
+        
+        <p>Como puedes ver, este nuevo modelo de litigio es increíblemente lucrativo, pero matemáticamente implacable. Pretender liquidar a mano o en un Excel básico raíces cuadradas, diferencias exponenciales, indexaciones históricas mes a mes, tasas de reemplazo dinámicas y expectativas de vida es un riesgo gigantesco. Un solo error al despejar una variable arruinará tu juramento estimatorio, le hará perder millones a tu cliente y destruirá tus honorarios.</p>
+        
+        <p>Pensando precisamente en esta necesidad del gremio, este documento y nuestro equipo en <span class="highlight">Supension Plus</span> han trabajado arduamente para crear la solución definitiva. Como expertos con más de 15 años en el sector, hemos integrado y automatizado la fórmula actuarial exacta de la Corte Suprema en nuestro software.</p>
+        
+        <p>Nuestra plataforma está diseñada para procesar la historia laboral de tu cliente en minutos, arrojando el cálculo pericial blindado, libre de errores humanos y listo para ser adjuntado a tu demanda con total rigor técnico.</p>
+        
+        <p>Es el momento de llevar tu firma al siguiente nivel. Si quieres aplicar este método sin fallar en el intento, contáctanos hoy mismo en <span class="highlight">Supension Plus</span> para conocer nuestra herramienta y comienza a exigir indemnizaciones millonarias con la seguridad de tener la tecnología y el precedente a tu favor.</p>
+    </div>
+
+</body>
+</html>

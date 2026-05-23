@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bono 2: Plantillas de Redacción Jurídica</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --accent-color: #d97706;
+            --border-color: #cbd5e1;
+            --success-color: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Banner de Cabecera */
+        .banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .banner h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .banner h2 {
+            font-size: 1.25rem;
+            color: #93c5fd;
+            font-weight: 600;
+        }
+
+        .header-tag {
+            background: #b45309;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Secciones */
+        .section-title {
+            background-color: #f8fafc;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .instructions {
+            padding: 1.5rem;
+            background-color: #eff6ff;
+            border-left: 4px solid var(--secondary-color);
+            font-size: 1rem;
+            color: #1e40af;
+            margin: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Bloques de Texto de Copia */
+        .copy-block-container {
+            margin: 1.5rem;
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .copy-header {
+            background: #e2e8f0;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .copy-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+        }
+
+        .btn-copy {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .btn-copy:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-copy.copied {
+            background: var(--success-color);
+        }
+
+        /* El área editable simula el documento final jurídico */
+        .editable-template {
+            padding: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--text-color);
+            text-align: justify;
+            background: white;
+            white-space: pre-wrap;
+        }
+
+        /* Inputs integrados en el texto para rellenar en tiempo real */
+        .field-input {
+            background: #fffdeb;
+            border: 1px dashed var(--accent-color);
+            color: #b45309;
+            font-weight: 600;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 180px;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .field-input:focus {
+            background: #fefcbf;
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .field-input.short { width: 70px; }
+        .field-input.medium { width: 130px; }
+
+        /* Cuadro de Advertencia Experta */
+        .warning-box {
+            margin: 2rem 1.5rem;
+            padding: 1.5rem;
+            background-color: #fffbeb;
+            border: 2px solid #fef3c7;
+            border-radius: 12px;
+            border-left: 6px solid var(--accent-color);
+        }
+
+        .warning-box h3 {
+            color: #92400e;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-box p {
+            font-size: 1rem;
+            color: #78350f;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .warning-box ul {
+            list-style-type: square;
+            margin-left: 1.5rem;
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        .warning-box li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-note {
+            padding: 2rem;
+            text-align: center;
+            background: #0f172a;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .copy-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+            .btn-copy { width: 100%; justify-content: center; }
+            .field-input { width: 100% !important; margin: 0.25rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="banner">
+            <span class="header-tag">BONUS 2</span>
+            <h1>PLANTILLAS DE REDACCIÓN JURÍDICA</h1>
+            <h2>Estructura de Pretensiones y Hechos para Copiar y Pegar</h2>
+        </div>
+
+        <div class="instructions">
+            <strong>Instrucciones de uso:</strong> Puedes digitar los datos directamente en las casillas amarillas de abajo para personalizar tu texto legal. Una vez listo, haz clic en el botón <strong>"Copiar Texto"</strong> para llevártelo directamente a tu documento de Word o demanda.
+        </div>
+
+        <div class="section-title">Plantilla de Redacción: Pretensiones Principales</div>
+
+        <div class="copy-block-container">
+            <div class="copy-header">
+                <span class="copy-title">Primera Pretensión Principal</span>
+                <button class="btn-copy" onclick="copyText('p1')">📋 Copiar Texto</button>
+            </div>
+            <div id="p1" class="editable-template"><strong>PRIMERA PRETENSIÓN PRINCIPAL:</strong> Que se declare civil y extracontractualmente responsable a la Administradora de Fondos de Pensiones <input type="text" class="field-input" placeholder="[Nombre de la AFP]"> por el daño antijurídico ocasionado a mi poderdante, el(la) señor(a) <input type="text" class="field-input" placeholder="[Nombre del Cliente]">. Dicho daño se materializa en la frustración definitiva de la oportunidad cierta y real que tenía mi cliente de alcanzar una mejor pensión en el Régimen de Prima Media; oportunidad que le fue arrebatada exclusivamente por la conducta culposa y negligente de la AFP al omitir su deber legal de brindar información clara, transparente y oportuna al momento del traslado y durante toda la afiliación.</div>
+        </div>
+
+        <div class="copy-block-container">
+            <div class="copy-header">
+                <span class="copy-title">Segunda Pretensión Principal</span>
+                <button class="btn-copy" onclick="copyText('p2')">📋 Copiar Texto</button>
+            </div>
+            <div id="p2" class="editable-template"><strong>SEGUNDA PRETENSIÓN PRINCIPAL:</strong> Como consecuencia de la declaración anterior, se condene a la AFP <input type="text" class="field-input" placeholder="[Nombre de la AFP]"> a pagar a favor de mi poderdante, en un único desembolso global y definitivo (sin sujeción a descuentos por salud y debidamente indexado), la suma de $ <input type="text" class="field-input" style="border-color:var(--secondary-color);" placeholder="[Valor actuarial exacto]">, por concepto de indemnización integral de perjuicios derivados de la Pérdida de Oportunidad.</div>
+        </div>
+
+
+        <div class="section-title">Plantilla de Redacción: Hechos Fundamentales (Requisitos de la Corte)</div>
+
+        <div class="copy-block-container">
+            <div class="copy-header">
+                <span class="copy-title">Hechos Estructurales (X, Y, Z)</span>
+                <button class="btn-copy" onclick="copyText('hechos-completos')">📋 Copiar Todo el Bloque de Hechos</button>
+            </div>
+            <div id="hechos-completos" class="editable-template"><strong>HECHO X (Situación potencialmente apta):</strong> Al momento de efectuarse el traslado desinformado, el día <input type="date" class="field-input medium">, mi poderdante se encontraba fáctica y jurídicamente en una posición idónea para construir su derecho pensional. Para esa fecha, contaba con <input type="number" class="field-input short" placeholder="Edad"> años de edad, se encontraba activo en el mercado laboral y ya había consolidado un capital de <input type="number" class="field-input medium" placeholder="No. Semanas"> semanas en Colpensiones (antes ISS).
+
+<strong>HECHO Y (Certeza de la oportunidad perdida):</strong> De no haber mediado el ocultamiento de información por parte de la AFP, mi poderdante habría conservado su legítima expectativa de pensionarse en el régimen público, donde el esfuerzo de toda su vida laboral le habría garantizado una mesada aproximada de $ <input type="text" class="field-input" style="border-color:var(--secondary-color);" placeholder="[Mesada Hipotética]">. Al afiliarse a ciegas al fondo privado, esa probabilidad seria y legítima fue aniquilada, condenándolo a recibir una mesada real muy inferior, por valor de $ <input type="text" class="field-input" placeholder="[Mesada Real RAIS]">.
+
+<strong>HECHO Z (Imposibilidad definitiva):</strong> La probabilidad de retornar a Colpensiones y obtener aquella ventaja económica desapareció definitivamente del patrimonio de mi poderdante el día <input type="date" class="field-input medium">. En este instante exacto, la AFP le reconoció la pensión bajo la modalid de <select class="field-input"><option value="Retiro Programado">Retiro Programado</option><option value="Renta Vitalicia">Renta Vitalicia</option><option value="Garantía de Pensión Mínima">Garantía de Pensión Mínima</option></select> y lo incluyó en nómina. A partir de ese momento, la reversión del régimen se volvió jurídicamente imposible (situación jurídica consolidada) y el daño previsional por pérdida de oportunidad se hizo definitivo, actual y cobrable.</div>
+        </div>
+
+
+        <div class="warning-box">
+            <h3>⚠ ADVERTENCIA DEL LITIGANTE EXPERTO</h3>
+            <p>Como puedes notar, la redacción jurídica es contundente e infalible, pero los espacios en blanco son los que ganan o pierden el caso. Si en las pretensiones y en el <strong>"Hecho Y"</strong> insertas valores calculados a la ligera, te arriesgas a que el juez rechace tu juramento estimatorio por no aplicar la fórmula actuarial estricta exigida por la Corte Suprema.</p>
+            <p><strong>Si no cuentas con el software especializado OPORTUNO V3.0, comunícate con Supension Plus:</strong></p>
+            <ul>
+                <li>Procesamos minuciosamente la historia laboral completa de tu cliente.</li>
+                <li>Elaboramos la reliquidación matemática precisa en Colpensiones.</li>
+                <li>Establecemos técnicamente la diferencia pensional exacta.</li>
+                <li>Aplicamos las fórmulas complejas de Probabilidad Pensional e Indexación de la Corte para entregarte cifras blindadas listas para rellenar.</li>
+            </ul>
+        </div>
+
+        <div class="footer-note">
+            JAQUE MATE A LAS AFP • Diseñado por César Cano - Supension Plus © 2026
+        </div>
+    </div>
+
+    <script>
+        function copyText(containerId) {
+            const container = document.getElementById(containerId);
+            let textToCopy = "";
+
+            container.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    textToCopy += node.textContent;
+                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                    if (node.tagName === "INPUT" || node.tagName === "SELECT") {
+                        textToCopy += node.value ? node.value : (node.placeholder ? node.placeholder : node.options[node.selectedIndex].text);
+                    } else {
+                        textToCopy += node.innerText;
+                    }
+                }
+            });
+
+            navigator.clipboard.writeText(textToCopy.trim()).then(() => {
+                const btn = event.currentTarget;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = "✓ ¡Copiado con Éxito!";
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error("Error al copiar texto: ", err);
+            });
+        }
+    </script>
+</body>
+</html>

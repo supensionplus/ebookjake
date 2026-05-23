@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclusiones: Tu Próximo Gran Movimiento</title>
+    <!-- Configuración de MathJax para la visualización de la fórmula en el resumen -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --accent-color: #d97706;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-tag {
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.25rem;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        h2.subtitle {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border-bottom: 4px solid var(--secondary-color);
+            padding-bottom: 1rem;
+        }
+
+        /* Estilo unificado para la cabecera de imagen */
+        .image-container {
+            width: 100%;
+            margin: 1.5rem 0 2.5rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Estilos específicos para las capturas del Software (c01, c02, etc.) */
+        .software-screenshot {
+            width: 100%;
+            margin: 1.5rem 0;
+            text-align: center;
+            background: #f8fafc;
+            padding: 1rem;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .software-screenshot img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .screenshot-caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: 0rem;
+        }
+
+        .math-block {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .contact-box {
+            background-color: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .contact-box h4 {
+            color: #166534;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            display: block;
+            font-size: 1.15rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0;
+            }
+            .container {
+                padding: 1.5rem;
+                border-radius: 0;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+            h2.subtitle {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="header-tag">Ebook Manual de Litigio Estratégico — Conclusiones</span>
+        <h1>CONCLUSIONES: TU PRÓXIMO GRAN MOVIMIENTO EN EL LITIGIO PREVISIONAL 2.0</h1>
+        <h2 class="subtitle">El cierre del camino estratégico y la llave hacia la certeza matemática.</h2>
+        
+        <!-- IMAGEN PRINCIPAL ENLAZADA E INTEGRADA -->
+        <div class="image-container">
+            <img src="https://i.ibb.co/K1dG4Dy/conclusiones.jpg" alt="Conclusiones finales - Litigio Previsional 2.0">
+        </div>
+        
+        <p>Llegamos al final de este recorrido estratégico. A lo largo de estas páginas, hemos desglosado paso a paso el mayor giro jurisprudencial en la historia reciente del derecho laboral y de la seguridad social en Colombia. Las sentencias de unificación proferidas el 4 de febrero de 2026 por la Sala de Casación Laboral de la Corte Suprema de Justicia han reescrito las reglas del juego.</p>
+        
+        <p>Si has leído con atención, ahora tienes en tus manos una ventaja competitiva abismal frente al 90% de los abogados que siguen cometiendo los mismos errores del pasado. Vamos a resumir tu nuevo arsenal, tus <strong>"Reglas de Oro"</strong> para ganar:</p>
+        
+        <ul>
+            <li><strong>1. Nunca más demandarás la ineficacia para un pensionado:</strong> Entendiste que el estatus de pensionado es una situation jurídica consolidada y un hecho consumado que la Corte Suprema prohíbe revertir.</li>
+            <li><strong>2. Tu nueva vía es la indemnización:</strong> Sabes que la omisión de las AFP en su deber de brindar información clara, transparente y oportuna configura una culpa leve que las obliga a reparar el daño con su propio patrimonio.</li>
+            <li><strong>3. Tienes el escudo probatorio:</strong> Aprendiste que la carga de la prueba recae exclusivamente sobre los fondos privados. Es a ellos a quienes les corresponde demostrar que sí informaron correctamente, liberando a tu cliente de esa carga diabólica.</li>
+            <li><strong>4. Tu daño es la Pérdida de Oportunidad:</strong> Olvidaste para siempre la trampa del lucro cesante. Ahora le exigirás al juez que repare la frustración de la probabilidad seria y legítima que tenía tu cliente de haberse pensionado mejor en Colpensiones.</li>
+            <li><strong>5. Cobrarás en un solo cheque:</strong> Asegurarás el éxito financiero de tus clientes (y tus honorarios) exigiendo un pago único, global y definitivo, debidamente indexado y sin descuentos por salud.</li>
+        </ul>
+
+        <h3>El último eslabón: La precisión matemática</h3>
+        
+        <p>Conoces la estrategia, tienes la ley y la jurisprudencia de tu lado. Tienes todo para hacer un jaque mate. Pero la teoría no te servirá de nada si fallas en la ejecución práctica.</p>
+        
+        <p>Como vimos en el Capítulo 6, la Corte Suprema ha condicionado el éxito de estas demandas a la aplicación estricta de una fórmula actuarial de alta complejidad:</p>
+        
+        <div class="math-block">
+            $$\text{Indemnización} = \text{PP} \times (\text{MesadaRPM} - \text{MesadaRAIS}) \times (\text{EVaños} \times 13)$$
+        </div>
+        
+        <p>Calcular la Probabilidad Pensional (PP) despejando raíces cuadradas y exponentes; reconstruir la historia laboral completa de tu cliente para liquidar el Ingreso Base de Liquidación (IBL) más favorable; aplicar las tasas de reemplazo dinámicas de la Ley 797 de 2003; y proyectar expectativas de vida basadas en la Resolución 1555 de 2010 de la Superintendencia Financiera, no es un trabajo para un abogado armado con una calculadora de escritorio.</p>
+        
+        <p>Un solo error en el juramento estimatorio, un dígito mal puesto en la proyección de la mesada hipotética de Colpensiones, y el juez te negará la indemnización por falta de certeza probatoria.</p>
+        
+        <p><span class="highlight">No arriesgues tus casos. Apóyate en los expertos.</span></p>
+        
+        <p>Este Ebook ha sido preparado por <strong>César Cano</strong>, gerente de <strong>Supension Plus</strong>, Contador de la Universidad EAFIT y experto con más de 15 años de trayectoria ininterrumpida en la liquidación de pensiones. Durante años, hemos sido el aliado invisible detrás de los mayores éxitos en los estrados judiciales a nivel nacional e internacional.</p>
+        
+        <p>En Supension Plus, ya hemos descifrado, automatizado y blindado la fórmula exacta dictada por la Corte Suprema en estas cinco sentencias hito. Hemos creado nuestro software <span class="highlight">OPORTUNO</span>.</p>
+
+        <!-- ================= PANEL DE CAPTURAS DEL SOFTWARE ================= -->
+
+        <p>Le ayuda a identificar si el caso a tomar es viable:</p>
+        <!-- IMAGEN C01 -->
+        <div class="software-screenshot">
+            <img src="https://i.ibb.co/3YkF8Hs5/c01.png" alt="Módulo de viabilidad del caso - OPORTUNO">
+            <div class="screenshot-caption">Pantalla interactiva c01: Análisis predictivo de viabilidad jurídica</div>
+        </div>
+        
+        <p>Llena los datos y liquide con un solo clic:</p>
+        <!-- IMAGEN C02 -->
+        <div class="software-screenshot">
+            <img src="https://i.ibb.co/rK333t5C/c02.png" alt="Formulario de entrada y liquidación automática - OPORTUNO">
+            <div class="screenshot-caption">Pantalla interactiva c02: Interfaz de captura de datos históricos e IBL</div>
+        </div>
+        
+        <p>Además puede llevar un control de todos sus casos y exportarlos a Word, Excel y PDF:</p>
+        <!-- IMAGEN C03 -->
+        <div class="software-screenshot">
+            <img src="https://i.ibb.co/hFYFvNhb/c03.png" alt="Panel de control y exportación multiformato - OPORTUNO">
+            <div class="screenshot-caption">Pantalla interactiva c03: Dashboard de gestión de procesos judiciales</div>
+        </div>
+        
+        <p>Y con un clic abrir el caso de nuevo o consultar su información:</p>
+        <!-- IMAGEN C04 -->
+        <div class="software-screenshot">
+            <img src="https://i.ibb.co/4n3c2FRT/c06.png" alt="Consulta rápida e historial de casos - OPORTUNO">
+            <div class="screenshot-caption">Pantalla interactiva c04: Acceso centralizado y auditoría de cálculos</div>
+        </div>
+        
+        <p>No necesita llenarse de archivos de Excel. Una sola aplicación, que lee todos sus casos.</p>
+        <!-- IMAGEN C05 -->
+        <div class="software-screenshot">
+            <img src="https://i.ibb.co/d4fY20X9/c05.png" alt="Base de datos unificada sin archivos dispersos - OPORTUNO">
+
+            <img src="https://i.ibb.co/4n3c2FRT/c06.png" alt="Base de datos unificada sin archivos dispersos - OPORTUNO">
+
+            <div class="screenshot-caption">Pantalla interactiva c05: Consolidado pericial inteligente</div>
+        </div>
+
+        <!-- ================================================================== -->
+        
+        <p>Nuestro software especializado realiza en minutos lo que a un profesional le tomaría días de frustración, entregándote un dictamen pericial exacto, inobjetable y listo para soportar tus pretensiones en el juzgado.</p>
+        
+        <p>Es tu momento de liderar el Litigio Previsional 2.0 y ayudar a miles de pensionados a recuperar lo que les pertenece.</p>
+        
+        <p>¿Estás listo para exigir indemnizaciones millonarias con total seguridad y precisión? No dejes tus honorarios al azar.</p>
+        
+        <p>Contáctanos hoy mismo y descubre cómo nuestra tecnología en liquidaciones de Indemnización por Pérdida de Oportunidades <strong>OPORTUNO</strong> será tu mejor socio estratégico en los estrados.</p>
+        
+        <div class="contact-box">
+            <h4>¡El precedente ya te dio la razón!</h4>
+            <p>Deja que Supension Plus te dé los números exactos para cobrarla.</p>
+            <a href="https://wa.me/573117715353" class="contact-link" target="_blank">📞 WhatsApp: +57 311 771 5353</a>
+            <a href="mailto:supensionplus@gmail.com" class="contact-link">✉️ Correo: supensionplus@gmail.com</a>
+        </div>
+    </div>
+
+</body>
+</html>

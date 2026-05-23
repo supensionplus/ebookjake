@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bono 1: Kit de Litigio Previsional</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --text-color: #1f2937;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Banner de Cabecera */
+        .banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .banner h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .banner h2 {
+            font-size: 1.25rem;
+            color: #93c5fd;
+            font-weight: 600;
+        }
+
+        .header-tag {
+            background: #b45309;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Secciones del Formulario */
+        .section-title {
+            background-color: #f8fafc;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 1.5rem;
+        }
+
+        .instructions {
+            padding: 1.5rem;
+            background-color: #eff6ff;
+            border-left: 4px solid var(--secondary-color);
+            font-size: 0.95rem;
+            color: #1e40af;
+            margin: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Formulario General e Identificación */
+        .client-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        input[type="text"], input[type="date"], select, input[type="number"] {
+            padding: 0.65rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Filas de Checklist Interactivas */
+        .checklist-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            transition: background-color 0.2s;
+        }
+
+        .checklist-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .checklist-text {
+            flex: 1;
+            font-size: 1.05rem;
+        }
+
+        .checklist-text small {
+            display: block;
+            color: #64748b;
+            margin-top: 0.25rem;
+            font-size: 0.85rem;
+        }
+
+        /* Botones de Opción Dinámicos */
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            min-width: 140px;
+        }
+
+        .btn-check {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Estados Activos del Checklist */
+        .btn-check.yes.active {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .btn-check.no.active {
+            background-color: #64748b;
+            color: white;
+            border-color: #64748b;
+        }
+
+        /* Alertas de Líneas Rojas */
+        .btn-check.yes-danger.active {
+            background-color: var(--danger-color);
+            color: white;
+            border-color: var(--danger-color);
+        }
+
+        .btn-check.no-success.active {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .alert-box {
+            margin: 0.5rem 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: none;
+        }
+
+        .alert-danger {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--danger-color);
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background-color: #ecfdf5;
+            border-left: 4px solid var(--success-color);
+            color: #065f46;
+        }
+
+        /* Tarjetas Estáticas Verificación */
+        .verif-card {
+            margin: 1rem 1.5rem;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .verif-badge {
+            background: #dbeafe;
+            color: var(--primary-color);
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        /* Pie de página descriptivo */
+        .footer-note {
+            padding: 2rem;
+            text-align: center;
+            background: #0f172a;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .client-info-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .checklist-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .btn-group { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="banner">
+            <span class="header-tag">MATERIAL EXCLUSIVO</span>
+            <h1>BONO 1: KIT DE LITIGIO PREVISIONAL</h1>
+            <h2>Herramientas de Diagnóstico Técnico y Recolección de Datos</h2>
+        </div>
+
+        <div class="section-title">Información General del Caso</div>
+        <div class="client-info-grid">
+            <div class="form-group full-width">
+                <label>Nombre y Apellidos del Cliente:</label>
+                <input type="text" placeholder="Ej. Juan Carlos Pérez">
+            </div>
+            <div class="form-group">
+                <label>Número de Cédula:</label>
+                <input type="text" placeholder="C.C. No.">
+            </div>
+            <div class="form-group">
+                <label>Fecha de Nacimiento:</label>
+                <input type="date" id="birthdate" onchange="calcularEdadLey()">
+            </div>
+        </div>
+
+        <div class="section-title">Parte I: Checklist de Diagnóstico de Viabilidad</div>
+        <div class="instructions">
+            Utiliza este bloque dinámico para perfilar las condiciones jurídicas iniciales de la acción judicial.
+        </div>
+
+        <div class="checklist-item">
+            <div class="checklist-text">
+                <strong>1. Estatus Pensional:</strong> ¿El cliente ya adquirió el estatus de pensionado en el fondo privado y fue incluido en nómina (está cobrando)?
+                <small>Nota crítica de la Corte Suprema de Justicia.</small>
+            </div>
+            <div class="btn-group">
+                <button class="btn-check yes" onclick="toggleP1(this, 'si', 'alert1')">SÍ</button>
+                <button class="btn-check no" onclick="toggleP1(this, 'no', 'alert1')">NO</button>
+            </div>
+        </div>
+        <div id="alert1" class="alert-box"></div>
+
+        <div class="checklist-item">
+            <div class="checklist-text">
+                <strong>2. Prescripción:</strong> ¿Han pasado menos de 3 años desde el momento exacto en que tu cliente empezó a percibir (cobrar en nómina) su primera mesada?
+                <small>Ojo: La fecha clave e inamovible es la inclusión oficial en nómina.</small>
+            </div>
+            <div class="btn-group">
+                <button class="btn-check yes" onclick="toggleP2(this, 'si', 'alert2')">SÍ</button>
+                <button class="btn-check no" onclick="toggleP2(this, 'no', 'alert2')">NO</button>
+            </div>
+        </div>
+        <div id="alert2" class="alert-box"></div>
+
+        <div class="checklist-item">
+            <div class="checklist-text">
+                <strong>3. Deber de Información:</strong> Al trasladarse, ¿tu cliente firmó sin recibir una proyección clara y comparativa de su futura pensión en ambos regímenes?
+                <small>Recuerda: Es una negación indefinida; la carga de la prueba es de la AFP.</small>
+            </div>
+            <div class="btn-group">
+                <button class="btn-check yes" onclick="toggleP3(this, 'si', 'alert3')">SÍ</button>
+                <button class="btn-check no" onclick="toggleP3(this, 'no', 'alert3')">NO</button>
+            </div>
+        </div>
+        <div id="alert3" class="alert-box"></div>
+
+
+        <div class="section-title" style="color:#b91c1c; border-bottom-color:#b91c1c;">Parte II: Líneas Rojas (Trampas de la AFP para no pagar)</div>
+        <div class="instructions" style="background-color:#fef2f2; border-left-color:#b91c1c; color:#991b1b;">
+            <strong>¡Atención!</strong> Si marcas <span style="color:var(--danger-color); font-weight:bold;">SÍ</span> en alguna de estas casillas, la AFP usará este argumento como defensa fuerte. El software OPORTUNO evaluará el impacto en el cálculo actuarial.
+        </div>
+
+        <div class="checklist-item">
+            <div class="checklist-text">
+                <strong>4. Pensión Mínima Maliciosa:</strong> ¿Aceptó la garantía de pensión mínima sabiendo claramente que NO le alcanzaban las 1.300 semanas en Colpensiones?
+                <small>Si tu cliente SÍ alcanzaba las 1.300 semanas en su vida laboral, marca NO.</small>
+            </div>
+            <div class="btn-group">
+                <button class="btn-check yes-danger" onclick="toggleRedLines(this, 'si', 'alert4')">SÍ</button>
+                <button class="btn-check no-success" onclick="toggleRedLines(this, 'no', 'alert4')">NO</button>
+            </div>
+        </div>
+        <div id="alert4" class="alert-box"></div>
+
+        <div class="checklist-item">
+            <div class="checklist-text">
+                <strong>5. Retiro de Excedentes:</strong> ¿Tu cliente solicitó y se gastó los excedentes de libre disponibilidad de su cuenta de ahorro individual (RAIS)?
+            </div>
+            <div class="btn-group">
+                <button class="btn-check yes-danger" onclick="toggleRedLines(this, 'si', 'alert5')">SÍ</button>
+                <button class="btn-check no-success" onclick="toggleRedLines(this, 'no', 'alert5')">NO</button>
+            </div>
+        </div>
+        <div id="alert5" class="alert-box"></div>
+
+        <div class="checklist-item">
+            <div class="checklist-text">
+                <strong>6. Pensión Anticipada:</strong> ¿Tu cliente se pensionó antes de la edad de ley (57 mujeres / 62 hombres) negociando anticipadamente su bono pensional?
+            </div>
+            <div class="btn-group">
+                <button class="btn-check yes-danger" onclick="toggleRedLines(this, 'si', 'alert6')">SÍ</button>
+                <button class="btn-check no-success" onclick="toggleRedLines(this, 'no', 'alert6')">NO</button>
+            </div>
+        </div>
+        <div id="alert6" class="alert-box"></div>
+
+
+        <div class="section-title">Parte III: Estrategia de Demanda (Reglas de Oro de la CSJ)</div>
+        <div class="instructions" style="background-color: #f0fdf4; border-left-color: var(--success-color); color: #166534;">
+            Verificación obligatoria de requisitos estructurales antes del radicado judicial.
+        </div>
+
+        <div class="verif-card">
+            <div class="verif-badge">Acción</div>
+            <p><strong>Acción a demandar:</strong> No pedí la ineficacia (nulidad del traslado). Solicité la <strong>Indemnización Plena de Perjuicios</strong> por responsabilidad civil previsional.</p>
+        </div>
+        <div class="verif-card">
+            <div class="verif-badge">Daño</div>
+            <p><strong>Teoría del Daño:</strong> No pedí un simple "Lucro Cesante". El daño se tasó bajo la teoría avanzada de la <strong>"Pérdida de Oportunidad"</strong> (chance frustrada).</p>
+        </div>
+        <div class="verif-card">
+            <div class="verif-badge">Pago</div>
+            <p><strong>Forma de Pago:</strong> Exigí que la condena se tase como un <strong>pago único, global y definitivo</strong> (no en formato de rentas vitalicias mensuales).</p>
+        </div>
+        <div class="verif-card">
+            <div class="verif-badge">Protección</div>
+            <p><strong>Protección del dinero:</strong> Solicité expresamente que el capital sea <strong>indexado</strong> y que quede libre de descuentos para aportes de salud.</p>
+        </div>
+        <div class="verif-card">
+            <div class="verif-badge">Prueba</div>
+            <p><strong>Carga Probatoria:</strong> Invoqué la <strong>inversión de la carga de la prueba</strong> frente a la falta de información por tratarse de una negación indefinida.</p>
+        </div>
+
+
+        <div class="section-title">Parte IV: Ficha de Datos para ingresar al Software (OPORTUNO V3.0)</div>
+        <div class="client-info-grid">
+            <div class="form-group">
+                <label>Sexo y Edad de Ley (Variable Er):</label>
+                <select id="sexo" onchange="calcularEdadLey()">
+                    <option value="">Seleccione...</option>
+                    <option value="F">Femenino (Edad Ley 57)</option>
+                    <option value="M">Masculino (Edad Ley 62)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Fecha exacta del traslado al Fondo Privado:</label>
+                <input type="date">
+            </div>
+            <div class="form-group">
+                <label>Edad exacta al momento del traslado (Variable E):</label>
+                <input type="number" placeholder="Años">
+            </div>
+            <div class="form-group">
+                <label>Semanas cotizadas al momento del traslado (Variable S):</label>
+                <input type="number" placeholder="Semanas">
+            </div>
+            <div class="form-group">
+                <label>Fecha de inclusión en nómina en AFP (dd/mm/aaaa):</label>
+                <input type="date">
+            </div>
+            <div class="form-group">
+                <label>Edad exacta a la fecha de la pensión:</label>
+                <input type="number" placeholder="Años">
+            </div>
+            <div class="form-group">
+                <label>Expectativa de vida a esa edad (Variable EV - Res. 1555/2010):</label>
+                <input type="number" step="0.01" placeholder="Años de expectativa">
+            </div>
+            <div class="form-group">
+                <label>Valor Primera Mesada recibida en la AFP:</label>
+                <input type="number" placeholder="$ Valor en pesos">
+            </div>
+            <div class="form-group full-width">
+                <label style="color:var(--primary-color);">Valor Mesada Hipotética en Colpensiones (Cálculo Especial Supension Plus):</label>
+                <input type="number" style="border-color:var(--secondary-color);" placeholder="$ Valor proyectado">
+            </div>
+        </div>
+
+        <div class="footer-note">
+            JAQUE MATE A LAS AFP • Diseñado por César Cano - Supension Plus © 2026
+        </div>
+    </div>
+
+    <script>
+        // Resetear hermanos en el grupo de botones
+        function clearSiblings(btn) {
+            const siblings = btn.parentNode.children;
+            for (let s of siblings) {
+                s.classList.remove('active');
+            }
+        }
+
+        // Fila 1 - Estatus pensional
+        function toggleP1(btn, opcion, alertId) {
+            clearSiblings(btn);
+            btn.classList.add('active');
+            const alertBox = document.getElementById(alertId);
+            alertBox.style.display = "block";
+            
+            if(opcion === 'si') {
+                alertBox.className = "alert-box alert-success";
+                alertBox.innerHTML = "<strong>✓ Ruta Correcta:</strong> El estatus está consolidado. ¡Vamos con toda por la Indemnización de Perjuicios!";
+            } else {
+                alertBox.className = "alert-box alert-danger";
+                alertBox.innerHTML = "<strong>⚠ Cambio de Estrategia:</strong> Si el afiliado NO se ha pensionado, la vía jurídica que debes invocar sigue siendo la Ineficacia del Traslado.";
+            }
+        }
+
+        // Fila 2 - Prescripción
+        function toggleP2(btn, opcion, alertId) {
+            clearSiblings(btn);
+            btn.classList.add('active');
+            const alertBox = document.getElementById(alertId);
+            alertBox.style.display = "block";
+            
+            if(opcion === 'si') {
+                alertBox.className = "alert-box alert-success";
+                alertBox.innerHTML = "<strong>✓ Caso a Salvo:</strong> El término de prescripción de 3 años se encuentra abierto. Caso viable.";
+            } else {
+                alertBox.className = "alert-box alert-danger";
+                alertBox.innerHTML = "<strong>⚠ Alerta Extrema:</strong> Si han pasado más de 3 años desde la inclusión en nómina, el caso presenta un altísimo riesgo de excepción de prescripción en el juzgado.";
+            }
+        }
+
+        // Fila 3 - Deber de Información
+        function toggleP3(btn, opcion, alertId) {
+            clearSiblings(btn);
+            btn.classList.add('active');
+            const alertBox = document.getElementById(alertId);
+            alertBox.style.display = "block";
+            
+            if(opcion === 'si') {
+                alertBox.className = "alert-box alert-success";
+                alertBox.innerHTML = "<strong>✓ Ventaja Procesal:</strong> Al alegar la falta de información, se activa la negación indefinida y la AFP estará obligada a probar que sí asesoró bien.";
+            } else {
+                alertBox.className = "alert-box alert-danger";
+                alertBox.innerHTML = "<strong>⚠ Atención:</strong> Si el cliente firmó habiendo recibido proyecciones matemáticas escritas y reales, la AFP tendrá pruebas contundentes para defenderse.";
+            }
+        }
+
+        // Filas Parte II - Líneas Rojas
+        function toggleRedLines(btn, opcion, alertId) {
+            clearSiblings(btn);
+            btn.classList.add('active');
+            const alertBox = document.getElementById(alertId);
+            alertBox.style.display = "block";
+            
+            if(opcion === 'si') {
+                alertBox.className = "alert-box alert-danger";
+                alertBox.innerHTML = "<strong>⚠ Línea Roja Detectada:</strong> La AFP usará este hecho para intentar tumbar el nexo causal. Digita este dato obligatoriamente en OPORTUNO V3.0 para medir el impacto financiero.";
+            } else {
+                alertBox.className = "alert-box alert-success";
+                alertBox.innerHTML = "<strong>✓ Zona Segura:</strong> Tu cliente no incurrió en este hecho consumado. Un punto más a favor del éxito procesal.";
+            }
+        }
+
+        // Auto-selección sutil basada en lógica de edad
+        function calcularEdadLey() {
+            const bdate = document.getElementById('birthdate').value;
+            const sexo = document.getElementById('sexo');
+            if(!bdate) return;
+
+            const birth = new Date(bdate);
+            const today = new Date();
+            let age = today.getFullYear() - birth.getFullYear();
+            const m = today.getMonth() - birth.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) { age--; }
+            
+            // Sugerencia visual en el combobox de sexo según estadísticas
+            if (sexo.value === "") {
+                // Dejamos que el usuario escoja voluntariamente, sin forzar.
+            }
+        }
+    </script>
+</body>
+</html>
