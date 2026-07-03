@@ -27,9 +27,9 @@
         .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.95); backdrop-filter: blur(8px); }
         .modal.active { display: flex; flex-direction: column; }
 
-        /* Contenedor PDF Responsivo */
-        .pdf-container { flex: 1; width: 100%; height: 100%; -webkit-overflow-scrolling: touch; overflow-y: auto; background: #333; }
-        #pdf-frame { width: 100%; height: 100%; border: none; }
+        /* Contenedor HTML Responsivo sin fondos grises de visor de PDF */
+        .pdf-container { flex: 1; width: 100%; height: 100%; -webkit-overflow-scrolling: touch; overflow-y: auto; background: var(--bg); }
+        #pdf-frame { width: 100%; height: 100%; border: none; background: transparent; }
 
         @media (max-width: 768px) {
             .chapter-card img { height: 130px; }
@@ -171,11 +171,10 @@
 
         function check(id) { logged ? openPDF(id) : toggleModal('locked-modal'); }
 
-function openPDF(id) {
-            // Mapeamos los identificadores con sus respectivos archivos .html
+        function openPDF(id) {
             const paginas = {
                 'intro': 'intro.html',
-                'resumen': 'resumen.html', // Por si usas un resumen independiente
+                'resumen': 'conclusiones.html', 
                 'cap1': 'cap1.html',
                 'cap2': 'cap2.html',
                 'cap3': 'cap3.html',
@@ -186,18 +185,17 @@ function openPDF(id) {
                 'bono2': 'bono2.html'
             };
 
-            // Ponemos el título estético en la barra superior del visor
             document.getElementById('pdf-title').innerText = id.toUpperCase();
             
-            // Obtenemos el nombre del archivo HTML correspondiente. Si no existe, usa el id + '.html' por defecto
             const archivoHtml = paginas[id] || (id + '.html');
             
-            // Cargamos directamente el HTML dentro del iframe sin pasar por Google Docs
-            document.getElementById('pdf-frame').src = archivoHtml;
+            // Ponemos una estampa de tiempo (?t=...) al final para obligar al navegador a no usar el PDF viejo en caché
+            const timestamp = new Date().getTime();
+            document.getElementById('pdf-frame').src = `${archivoHtml}?v=${timestamp}`;
             
-            // Cerramos el modal de bloqueo si estaba abierto y abrimos el contenedor
             if(document.getElementById('locked-modal').classList.contains('active')) toggleModal('locked-modal');
             toggleModal('pdf-modal');
-        }    </script>
+        }
+    </script>
 </body>
 </html>
