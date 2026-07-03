@@ -171,15 +171,33 @@
 
         function check(id) { logged ? openPDF(id) : toggleModal('locked-modal'); }
 
-        function openPDF(id) {
-            document.getElementById('pdf-title').innerText = id;
-            // Visor de Google para asegurar responsividad y todas las páginas en móvil
-            const pdfUrl = window.location.origin + window.location.pathname.replace('ebook.html', '') + id + '.pdf';
-            const finalUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
-            document.getElementById('pdf-frame').src = finalUrl;
+function openPDF(id) {
+            // Mapeamos los identificadores con sus respectivos archivos .html
+            const paginas = {
+                'intro': 'intro.html',
+                'resumen': 'resumen.html', // Por si usas un resumen independiente
+                'cap1': 'cap1.html',
+                'cap2': 'cap2.html',
+                'cap3': 'cap3.html',
+                'cap4': 'cap4.html',
+                'cap5': 'cap5.html',
+                'cap6': 'cap6.html',
+                'bono1': 'bono1.html',
+                'bono2': 'bono2.html'
+            };
+
+            // Ponemos el título estético en la barra superior del visor
+            document.getElementById('pdf-title').innerText = id.toUpperCase();
+            
+            // Obtenemos el nombre del archivo HTML correspondiente. Si no existe, usa el id + '.html' por defecto
+            const archivoHtml = paginas[id] || (id + '.html');
+            
+            // Cargamos directamente el HTML dentro del iframe sin pasar por Google Docs
+            document.getElementById('pdf-frame').src = archivoHtml;
+            
+            // Cerramos el modal de bloqueo si estaba abierto y abrimos el contenedor
             if(document.getElementById('locked-modal').classList.contains('active')) toggleModal('locked-modal');
             toggleModal('pdf-modal');
-        }
-    </script>
+        }    </script>
 </body>
 </html>
